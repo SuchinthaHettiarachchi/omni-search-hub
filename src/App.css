@@ -66,6 +66,7 @@ h1 {
   cursor: pointer;
   border-radius: 0 8px 8px 0;
   font-size: 18px;
+  transition: all 0.3s ease;
 }
 
 .container.light .search-box button {
@@ -82,22 +83,30 @@ h1 {
 }
 
 button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px;
+  background: #1e1e1e;
   border: none;
-  border-radius: 10px;
-  background: #162447;
+  border-radius: 50%;
+  padding: 15px;
+  font-size: 20px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s ease;
+  color: #fff;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  opacity: 0; /* start invisible for entrance animation */
+  animation: fadeInUp 0.5s ease forwards;
 }
 
 button:hover {
-  background: #00f7ff;
-  color: #162447;
+  background: #00e0ff;
+  color: #121212;
+  transform: scale(1.15) rotate(-5deg);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.4);
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .container.light button {
@@ -109,6 +118,27 @@ button:hover {
   background: #162447;
   color: #00f7ff;
 }
+
+/* Entrance animation for grid buttons */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Slight delay for each button in the grid */
+.grid button:nth-child(1) { animation-delay: 0.05s; }
+.grid button:nth-child(2) { animation-delay: 0.1s; }
+.grid button:nth-child(3) { animation-delay: 0.15s; }
+.grid button:nth-child(4) { animation-delay: 0.2s; }
+.grid button:nth-child(5) { animation-delay: 0.25s; }
+.grid button:nth-child(6) { animation-delay: 0.3s; }
+.grid button:nth-child(7) { animation-delay: 0.35s; }
 
 .recent {
   margin-bottom: 20px;
@@ -127,6 +157,11 @@ button:hover {
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.recent-list button:hover {
+  transform: scale(1.1);
 }
 
 .container.light .recent-list button {
