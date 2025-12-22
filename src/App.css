@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  text-align: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+.container.dark {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.container.light {
+  background: #f4f6f8;
+  color: #162447;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.theme-toggle button {
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+h1 {
+  margin-bottom: 30px;
+  color: #00f7ff;
+}
+
+.container.light h1 {
+  color: #162447;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  padding: 12px;
+  width: 70%;
+  max-width: 400px;
+  font-size: 16px;
+  border-radius: 8px 0 0 8px;
+  border: none;
+  outline: none;
+}
+
+.search-box button {
+  padding: 12px;
+  background: #00f7ff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+  font-size: 18px;
+}
+
+.container.light .search-box button {
+  background: #162447;
+  color: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  max-width: 700px;
+  margin: auto;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #162447;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #00f7ff;
+  color: #162447;
+}
+
+.container.light button {
+  background: #00f7ff;
+  color: #fff;
+}
+
+.container.light button:hover {
+  background: #162447;
+  color: #00f7ff;
+}
+
+.recent {
+  margin-bottom: 20px;
+}
+
+.recent-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.recent-list button {
+  background: #ff7f50;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.container.light .recent-list button {
+  background: #162447;
+  color: #00f7ff;
+}
