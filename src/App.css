@@ -7,7 +7,7 @@ body {
   text-align: center;
   padding: 40px 20px;
   min-height: 100vh;
-  transition: all 0.3s ease;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 /* DARK THEME */
@@ -34,6 +34,11 @@ body {
   border-radius: 50%;
   cursor: pointer;
   font-size: 18px;
+  transition: transform 0.4s ease;
+}
+
+.theme-toggle button:active {
+  transform: rotate(20deg);
 }
 
 /* TITLE */
@@ -64,6 +69,10 @@ h1 {
   outline: none;
   background: #121218;
   color: #fff;
+}
+
+.search-box input::placeholder {
+  color: #a0a0a0;
 }
 
 .search-box button {
@@ -113,7 +122,7 @@ button:hover {
   background: #7df9ff;
   color: #121212;
   transform: scale(1.08);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.45);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.45), 0 0 15px rgba(0, 223, 255, 0.4);
 }
 
 button:active {
@@ -123,7 +132,7 @@ button:active {
 
 /* LIGHT BUTTONS */
 .container.light button {
-  background: #00f7ff;
+  background: #0b6e13;
   color: #fff;
 }
 
@@ -180,5 +189,16 @@ button:active {
 
 .container.light .recent-list button {
   background: #162447;
-  color: #00f7ff;
+  color: #2e7405;
+}
+
+/* RESPONSIVE TWEAKS */
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+  
+  .search-box input {
+    width: 60%;
+  }
 }
