@@ -30,3 +30,4 @@ Instead of opening multiple apps or tabs, users can search once and jump directl
 ```bash
 git clone https://github.com/your-username/omnisearch-hub.git
 cd omnisearch-hub
+
