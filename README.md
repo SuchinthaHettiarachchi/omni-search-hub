@@ -1,18 +1,32 @@
-# OmniSearch Hub
+# 🔍 OmniSearch Hub
 
-OmniSearch Hub is a minimalist web application that lets users search and quickly access all their favorite platforms like WhatsApp, Instagram, Facebook, X (Twitter), Telegram, YouTube, and Spotify — all from one clean dashboard.
+OmniSearch Hub is a minimalist web application that lets users search and quickly access their favorite platforms — all from one clean dashboard.
 
-## Features
-- Dark & light theme toggle
-- Animated interactive buttons
-- Search across multiple platforms
-- Recent search history (stored locally)
-- Mobile-friendly behavior
+Instead of opening multiple apps or tabs, users can search once and jump directly to platforms like WhatsApp, Instagram, Facebook, X (Twitter), Telegram, YouTube, and Spotify.
 
-## Tech Stack
-- React
-- Vite
-- CSS (custom minimalist styling)
+---
 
-## Purpose
-This project was built as a personal productivity and portfolio project to demonstrate frontend development, UI design, and clean user experience.
+## ✨ Features
+
+- 🌙 Dark & Light theme toggle  
+- 🔎 Unified search across multiple platforms  
+- ⚡ Animated, interactive platform buttons  
+- 🕘 Recent search history (stored locally)  
+- 📱 Fully responsive & mobile-friendly UI  
+
+---
+
+## 🛠 Tech Stack
+
+- **React**
+- **Vite**
+- **CSS** (custom minimalist styling)
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/your-username/omnisearch-hub.git
+cd omnisearch-hub

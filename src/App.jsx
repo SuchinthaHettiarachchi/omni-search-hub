@@ -18,10 +18,8 @@ function App() {
   const [recent, setRecent] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
 
-  // Detect mobile
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  // Load recent searches from localStorage
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("recentSearches") || "[]");
     setRecent(saved);
@@ -79,17 +77,16 @@ function App() {
     Object.keys(links).forEach((platform) => search(platform));
   };
 
-  const toggleTheme = () => setDarkMode(!darkMode);
-
   return (
     <div className={darkMode ? "container dark" : "container light"}>
       <div className="theme-toggle">
-        <button onClick={toggleTheme}>
+        <button onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? <FaSun /> : <FaMoon />}
         </button>
       </div>
 
       <h1>OmniSearch Hub</h1>
+      <p className="subtitle">Search once. Explore everywhere.</p>
 
       <div className="search-box">
         <input
@@ -97,13 +94,16 @@ function App() {
           placeholder="Search everything..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && searchAll()}
         />
-        <button onClick={searchAll}><FaSearch /></button>
+        <button onClick={searchAll}>
+          <FaSearch />
+        </button>
       </div>
 
       {recent.length > 0 && (
         <div className="recent">
-          <h3>Recent Searches:</h3>
+          <h3>Recent Searches</h3>
           <div className="recent-list">
             {recent.map((r, i) => (
               <button key={i} onClick={() => setQuery(r)}>

@@ -6,7 +6,6 @@ html, body, #root {
 }
 
 body {
-  margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -16,21 +15,23 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  padding-top: 80px;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
-
-/* DARK THEME */
+/* THEMES */
 .container.dark {
   background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
   color: #eaeaea;
 }
 
-/* LIGHT THEME */
 .container.light {
   background: #f4f6f8;
   color: #162447;
 }
 
+/* THEME TOGGLE */
 .theme-toggle {
   position: absolute;
   top: 20px;
@@ -43,16 +44,11 @@ body {
   border-radius: 50%;
   cursor: pointer;
   font-size: 18px;
-  transition: transform 0.4s ease;
-}
-
-.theme-toggle button:active {
-  transform: rotate(20deg);
 }
 
 /* TITLE */
 h1 {
-  margin-bottom: 30px;
+  margin-bottom: 8px;
   color: #7df9ff;
   letter-spacing: 1px;
 }
@@ -61,11 +57,23 @@ h1 {
   color: #162447;
 }
 
+.subtitle {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 15px;
+  color: #a5f3ff;
+  opacity: 0.85;
+}
+
+.container.light .subtitle {
+  color: #4a5d73;
+}
+
 /* SEARCH */
 .search-box {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .search-box input {
@@ -80,10 +88,6 @@ h1 {
   color: #fff;
 }
 
-.search-box input::placeholder {
-  color: #a0a0a0;
-}
-
 .search-box button {
   padding: 12px;
   background: #7df9ff;
@@ -91,12 +95,6 @@ h1 {
   cursor: pointer;
   border-radius: 0 8px 8px 0;
   font-size: 18px;
-  transition: all 0.3s ease;
-}
-
-.container.light .search-box button {
-  background: #162447;
-  color: #fff;
 }
 
 /* GRID */
@@ -105,7 +103,8 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 15px;
   max-width: 700px;
-  margin: auto;
+  width: 100%;
+  margin-top: 20px;
 }
 
 /* BUTTONS */
@@ -118,11 +117,7 @@ button {
   cursor: pointer;
   color: #fff;
   transition: all 0.3s ease;
-  transform: scale(1);
   box-shadow: 0 4px 6px rgba(0,0,0,0.25);
-  backdrop-filter: blur(6px);
-
-  /* entrance animation */
   opacity: 0;
   animation: fadeInUp 0.5s ease forwards;
 }
@@ -131,38 +126,21 @@ button:hover {
   background: #7df9ff;
   color: #121212;
   transform: scale(1.08);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.45), 0 0 15px rgba(0, 223, 255, 0.4);
 }
 
-button:active {
-  transform: scale(0.96);
-  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
-}
-
-/* LIGHT BUTTONS */
-.container.light button {
-  background: #0b6e13;
-  color: #fff;
-}
-
-.container.light button:hover {
-  background: #162447;
-  color: #00f7ff;
-}
-
-/* ENTRANCE ANIMATION */
+/* ANIMATION */
 @keyframes fadeInUp {
-  0% {
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  100% {
+  to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
-/* STAGGER EFFECT */
+/* STAGGER */
 .grid button:nth-child(1) { animation-delay: 0.05s; }
 .grid button:nth-child(2) { animation-delay: 0.1s; }
 .grid button:nth-child(3) { animation-delay: 0.15s; }
@@ -171,42 +149,28 @@ button:active {
 .grid button:nth-child(6) { animation-delay: 0.3s; }
 .grid button:nth-child(7) { animation-delay: 0.35s; }
 
-/* RECENT SEARCHES */
+/* RECENT */
 .recent {
   margin-bottom: 20px;
 }
 
 .recent-list {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .recent-list button {
   background: #ff7f50;
-  color: #fff;
-  padding: 6px 12px;
   border-radius: 8px;
+  padding: 6px 12px;
   font-size: 13px;
-  transition: all 0.2s ease;
+  opacity: 1;
 }
 
-.recent-list button:hover {
-  transform: scale(1.1);
-}
-
-.container.light .recent-list button {
-  background: #162447;
-  color: #2e7405;
-}
-
-/* RESPONSIVE TWEAKS */
+/* RESPONSIVE */
 @media (max-width: 500px) {
-  .grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
-  
   .search-box input {
     width: 60%;
   }
