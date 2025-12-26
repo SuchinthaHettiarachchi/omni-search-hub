@@ -10,7 +10,7 @@ import {
   FaSpotify,
   FaSearch,
   FaSun,
-  FaMoon
+  FaMoon,
 } from "react-icons/fa";
 
 function App() {
@@ -20,13 +20,15 @@ function App() {
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+  // Load recent searches
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("recentSearches") || "[]");
     setRecent(saved);
   }, []);
 
+  // Save recent search
   const saveRecent = (q) => {
-    if (!q) return;
+    if (!q.trim()) return;
     const updated = [q, ...recent.filter((r) => r !== q)].slice(0, 5);
     setRecent(updated);
     localStorage.setItem("recentSearches", JSON.stringify(updated));
@@ -67,14 +69,17 @@ function App() {
         : `https://open.spotify.com/`,
   };
 
+  // Search single platform
   const search = (platform) => {
-    saveRecent(query);
     window.open(links[platform](query), "_blank");
   };
 
+  // Search all platforms
   const searchAll = () => {
     saveRecent(query);
-    Object.keys(links).forEach((platform) => search(platform));
+    Object.keys(links).forEach((platform) =>
+      window.open(links[platform](query), "_blank")
+    );
   };
 
   return (
@@ -128,4 +133,3 @@ function App() {
 }
 
 export default App;
-
