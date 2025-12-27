@@ -20,13 +20,11 @@ function App() {
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  // Load recent searches
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("recentSearches") || "[]");
     setRecent(saved);
   }, []);
 
-  // Save recent search
   const saveRecent = (q) => {
     if (!q.trim()) return;
     const updated = [q, ...recent.filter((r) => r !== q)].slice(0, 5);
@@ -38,43 +36,27 @@ function App() {
     whatsapp: (q) =>
       isMobile
         ? `whatsapp://send?text=${encodeURIComponent(q)}`
-        : q
-        ? `https://wa.me/?text=${encodeURIComponent(q)}`
-        : `https://web.whatsapp.com/`,
+        : `https://wa.me/?text=${encodeURIComponent(q)}`,
     instagram: (q) =>
-      q
-        ? `https://www.instagram.com/explore/tags/${encodeURIComponent(q)}`
-        : `https://www.instagram.com/`,
+      `https://www.instagram.com/explore/tags/${encodeURIComponent(q)}`,
     facebook: (q) =>
-      q
-        ? `https://www.facebook.com/search/top?q=${encodeURIComponent(q)}`
-        : `https://www.facebook.com/`,
+      `https://www.facebook.com/search/top?q=${encodeURIComponent(q)}`,
     twitter: (q) =>
-      q
-        ? `https://twitter.com/search?q=${encodeURIComponent(q)}`
-        : `https://twitter.com/`,
+      `https://twitter.com/search?q=${encodeURIComponent(q)}`,
     telegram: (q) =>
       isMobile
         ? `tg://msg?text=${encodeURIComponent(q)}`
-        : q
-        ? `https://t.me/s/${encodeURIComponent(q)}`
-        : `https://web.telegram.org/`,
+        : `https://t.me/s/${encodeURIComponent(q)}`,
     youtube: (q) =>
-      q
-        ? `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
-        : `https://www.youtube.com/`,
+      `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`,
     spotify: (q) =>
-      q
-        ? `https://open.spotify.com/search/${encodeURIComponent(q)}`
-        : `https://open.spotify.com/`,
+      `https://open.spotify.com/search/${encodeURIComponent(q)}`,
   };
 
-  // Search single platform
   const search = (platform) => {
     window.open(links[platform](query), "_blank");
   };
 
-  // Search all platforms
   const searchAll = () => {
     saveRecent(query);
     Object.keys(links).forEach((platform) =>
@@ -86,7 +68,7 @@ function App() {
     <div className={darkMode ? "container dark" : "container light"}>
       <div className="theme-toggle">
         <button onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? <FaSun /> : <FaMoon />}
+          <span>{darkMode ? <FaSun /> : <FaMoon />}</span>
         </button>
       </div>
 
@@ -102,7 +84,7 @@ function App() {
           onKeyDown={(e) => e.key === "Enter" && searchAll()}
         />
         <button onClick={searchAll}>
-          <FaSearch />
+          <span><FaSearch /></span>
         </button>
       </div>
 
@@ -112,7 +94,7 @@ function App() {
           <div className="recent-list">
             {recent.map((r, i) => (
               <button key={i} onClick={() => setQuery(r)}>
-                {r}
+                <span>{r}</span>
               </button>
             ))}
           </div>
@@ -120,13 +102,13 @@ function App() {
       )}
 
       <div className="grid">
-        <button onClick={() => search("whatsapp")}><FaWhatsapp /> WhatsApp</button>
-        <button onClick={() => search("instagram")}><FaInstagram /> Instagram</button>
-        <button onClick={() => search("facebook")}><FaFacebookF /> Facebook</button>
-        <button onClick={() => search("twitter")}><FaTwitter /> X</button>
-        <button onClick={() => search("telegram")}><FaTelegramPlane /> Telegram</button>
-        <button onClick={() => search("youtube")}><FaYoutube /> YouTube</button>
-        <button onClick={() => search("spotify")}><FaSpotify /> Spotify</button>
+        <button onClick={() => search("whatsapp")}><span><FaWhatsapp /> WhatsApp</span></button>
+        <button onClick={() => search("instagram")}><span><FaInstagram /> Instagram</span></button>
+        <button onClick={() => search("facebook")}><span><FaFacebookF /> Facebook</span></button>
+        <button onClick={() => search("twitter")}><span><FaTwitter /> X</span></button>
+        <button onClick={() => search("telegram")}><span><FaTelegramPlane /> Telegram</span></button>
+        <button onClick={() => search("youtube")}><span><FaYoutube /> YouTube</span></button>
+        <button onClick={() => search("spotify")}><span><FaSpotify /> Spotify</span></button>
       </div>
     </div>
   );

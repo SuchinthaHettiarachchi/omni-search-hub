@@ -16,7 +16,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   padding-top: 80px;
   transition: background 0.5s ease, color 0.5s ease;
 }
@@ -39,19 +38,10 @@ body {
   right: 20px;
 }
 
-.theme-toggle button {
-  padding: 8px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-}
-
 /* TITLE */
 h1 {
   margin-bottom: 8px;
   color: #7df9ff;
-  letter-spacing: 1px;
 }
 
 .container.light h1 {
@@ -59,43 +49,28 @@ h1 {
 }
 
 .subtitle {
-  margin-top: 0;
   margin-bottom: 30px;
   font-size: 15px;
-  color: #a5f3ff;
   opacity: 0.85;
-}
-
-.container.light .subtitle {
-  color: #4a5d73;
 }
 
 /* SEARCH */
 .search-box {
   display: flex;
-  justify-content: center;
   margin-bottom: 25px;
 }
 
 .search-box input {
   padding: 12px;
-  width: 70%;
-  max-width: 400px;
-  font-size: 16px;
+  width: 280px;
   border-radius: 8px 0 0 8px;
   border: none;
-  outline: none;
   background: #121218;
   color: #fff;
 }
 
 .search-box button {
-  padding: 12px;
-  background: #7df9ff;
-  border: none;
-  cursor: pointer;
   border-radius: 0 8px 8px 0;
-  font-size: 18px;
 }
 
 /* GRID */
@@ -105,11 +80,13 @@ h1 {
   gap: 15px;
   max-width: 700px;
   width: 100%;
-  margin-top: 20px;
 }
 
-/* BASE BUTTON */
+/* 🔥 BASE BUTTON (FIXED RIPPLE) */
 button {
+  position: relative;        /* ✅ REQUIRED */
+  overflow: hidden;          /* ✅ CLIPS RIPPLE */
+
   background: #1b1b1f;
   border: none;
   border-radius: 16px;
@@ -117,10 +94,10 @@ button {
   font-size: 18px;
   cursor: pointer;
   color: #fff;
-  transition: all 0.3s ease;
+
+  transition: transform 0.3s ease, color 0.3s ease;
   box-shadow: 0 4px 6px rgba(0,0,0,0.25);
 
-  /* entrance animation */
   opacity: 0;
   animation: fadeInUp 0.5s ease forwards;
 }
@@ -134,26 +111,24 @@ button span {
   gap: 8px;
 }
 
-/* FANCY RIPPLE EFFECT */
+/* RIPPLE EFFECT */
 button::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background: #7df9ff;
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
-  transition:
-    transform 0.75s cubic-bezier(.19,1,.22,1),
-    opacity 0.4s ease;
+  transition: transform 0.75s cubic-bezier(.19,1,.22,1), opacity 0.4s ease;
   z-index: 1;
 }
 
 button:hover::before {
-  transform: translate(-50%, -50%) scale(1.3);
+  transform: translate(-50%, -50%) scale(1.2);
   opacity: 1;
 }
 
@@ -162,7 +137,7 @@ button:hover {
   transform: scale(1.08);
 }
 
-/* LIGHT THEME BUTTON RIPPLE */
+/* LIGHT THEME RIPPLE */
 .container.light button::before {
   background: #162447;
 }
@@ -193,28 +168,10 @@ button:hover {
 .grid button:nth-child(7) { animation-delay: 0.35s; }
 
 /* RECENT */
-.recent {
-  margin-bottom: 20px;
-}
-
-.recent-list {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .recent-list button {
   background: #ff7f50;
   border-radius: 8px;
   padding: 6px 12px;
   font-size: 13px;
   opacity: 1;
-}
-
-/* RESPONSIVE */
-@media (max-width: 500px) {
-  .search-box input {
-    width: 60%;
-  }
 }
