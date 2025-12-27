@@ -167,11 +167,21 @@ button:hover {
 .grid button:nth-child(6) { animation-delay: 0.3s; }
 .grid button:nth-child(7) { animation-delay: 0.35s; }
 
-/* RECENT */
+/* RECENT SEARCH BUTTONS – SAME SIZE AS GRID */
 .recent-list button {
   background: #ff7f50;
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 13px;
+  border-radius: 16px;      /* same as base button */
+  padding: 15px;           /* same as base button */
+  font-size: 18px;         /* same as base button */
   opacity: 1;
+
+  /* keep ripple + animation behavior */
+  animation: none;         /* no entrance animation for recent */
 }
+
+/* keep text centered */
+.recent-list button span {
+  justify-content: center;
+}
+
+
