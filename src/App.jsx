@@ -32,6 +32,17 @@ function App() {
     localStorage.setItem("recentSearches", JSON.stringify(updated));
   };
 
+  const removeSearch = (q) => {
+    const updated = recent.filter((r) => r !== q);
+    setRecent(updated);
+    localStorage.setItem("recentSearches", JSON.stringify(updated));
+  };
+
+  const clearAllSearches = () => {
+    setRecent([]);
+    localStorage.removeItem("recentSearches");
+  };
+
   const links = {
     whatsapp: (q) =>
       isMobile
@@ -41,8 +52,7 @@ function App() {
       `https://www.instagram.com/explore/tags/${encodeURIComponent(q)}`,
     facebook: (q) =>
       `https://www.facebook.com/search/top?q=${encodeURIComponent(q)}`,
-    twitter: (q) =>
-      `https://twitter.com/search?q=${encodeURIComponent(q)}`,
+    twitter: (q) => `https://twitter.com/search?q=${encodeURIComponent(q)}`,
     telegram: (q) =>
       isMobile
         ? `tg://msg?text=${encodeURIComponent(q)}`
@@ -55,6 +65,7 @@ function App() {
 
   const search = (platform) => {
     window.open(links[platform](query), "_blank");
+    saveRecent(query);
   };
 
   const searchAll = () => {
@@ -84,31 +95,72 @@ function App() {
           onKeyDown={(e) => e.key === "Enter" && searchAll()}
         />
         <button onClick={searchAll}>
-          <span><FaSearch /></span>
+          <span>
+            <FaSearch />
+          </span>
         </button>
       </div>
 
       {recent.length > 0 && (
         <div className="recent">
-          <h3>Recent Searches</h3>
+          <div className="recent-header">
+            <h3>Recent Searches</h3>
+            <button className="clear-all" onClick={clearAllSearches}>
+              Clear All
+            </button>
+          </div>
           <div className="recent-list">
             {recent.map((r, i) => (
-              <button key={i} onClick={() => setQuery(r)}>
-                <span>{r}</span>
-              </button>
+              <div key={i} className="recent-item">
+                <button onClick={() => setQuery(r)}>{r}</button>
+                <button
+                  className="remove-btn"
+                  onClick={() => removeSearch(r)}
+                >
+                  ✕
+                </button>
+              </div>
             ))}
           </div>
         </div>
       )}
 
       <div className="grid">
-        <button onClick={() => search("whatsapp")}><span><FaWhatsapp /> WhatsApp</span></button>
-        <button onClick={() => search("instagram")}><span><FaInstagram /> Instagram</span></button>
-        <button onClick={() => search("facebook")}><span><FaFacebookF /> Facebook</span></button>
-        <button onClick={() => search("twitter")}><span><FaTwitter /> X</span></button>
-        <button onClick={() => search("telegram")}><span><FaTelegramPlane /> Telegram</span></button>
-        <button onClick={() => search("youtube")}><span><FaYoutube /> YouTube</span></button>
-        <button onClick={() => search("spotify")}><span><FaSpotify /> Spotify</span></button>
+        <button onClick={() => search("whatsapp")}>
+          <span>
+            <FaWhatsapp /> WhatsApp
+          </span>
+        </button>
+        <button onClick={() => search("instagram")}>
+          <span>
+            <FaInstagram /> Instagram
+          </span>
+        </button>
+        <button onClick={() => search("facebook")}>
+          <span>
+            <FaFacebookF /> Facebook
+          </span>
+        </button>
+        <button onClick={() => search("twitter")}>
+          <span>
+            <FaTwitter /> X
+          </span>
+        </button>
+        <button onClick={() => search("telegram")}>
+          <span>
+            <FaTelegramPlane /> Telegram
+          </span>
+        </button>
+        <button onClick={() => search("youtube")}>
+          <span>
+            <FaYoutube /> YouTube
+          </span>
+        </button>
+        <button onClick={() => search("spotify")}>
+          <span>
+            <FaSpotify /> Spotify
+          </span>
+        </button>
       </div>
     </div>
   );
