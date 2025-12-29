@@ -83,7 +83,7 @@ function App() {
         </button>
       </div>
 
-      <h1>OmniSearch Hub</h1>
+      <h1>SearchDeck </h1>
       <p className="subtitle">Search once. Explore everywhere.</p>
 
       <div className="search-box">
