@@ -23,13 +23,13 @@ body {
 
 /* ===== THEMES ===== */
 .container.dark {
-  background: linear-gradient(135deg, #000000, #141414);
+  background: linear-gradient(135deg, #524640, #303030);
   color: #e0e0e0; /* grey text */
 }
 
 .container.light {
-  background: #f4f6f8;
-  color: #162447;
+ background: linear-gradient(135deg, #a0e5f1, #f1f1f1);
+  color: #e0e0e0; /* grey text */
 }
 
 /* ===== THEME TOGGLE ===== */
@@ -206,4 +206,91 @@ button:hover {
 .recent-list button::before {
   width: 120px;
   height: 120px;
+}
+/* ===============================
+   🌗 UIVERSE THEME TOGGLE
+   =============================== */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch #input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ff8c00; /* orange */
+  transition: 0.4s;
+  overflow: hidden;
+}
+
+.sun-moon {
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #ffd27d;
+  transition: 0.4s;
+}
+
+/* Dark mode */
+#input:checked + .slider {
+  background-color: #000;
+}
+
+#input:checked + .slider .sun-moon {
+  transform: translateX(26px);
+  background-color: #e0e0e0;
+}
+
+.moon-dot {
+  opacity: 0;
+  transition: 0.4s;
+  fill: gray;
+}
+
+#input:checked + .slider .sun-moon .moon-dot {
+  opacity: 1;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round .sun-moon {
+  border-radius: 50%;
+}
+
+/* Stars */
+.stars {
+  transform: translateY(-32px);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+#input:checked + .slider .stars {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.star {
+  fill: #ccc;
+  position: absolute;
+  animation: star-twinkle 2s infinite;
+}
+
+@keyframes star-twinkle {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }

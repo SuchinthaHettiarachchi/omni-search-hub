@@ -9,8 +9,6 @@ import {
   FaYoutube,
   FaSpotify,
   FaSearch,
-  FaSun,
-  FaMoon,
 } from "react-icons/fa";
 
 function App() {
@@ -64,11 +62,13 @@ function App() {
   };
 
   const search = (platform) => {
+    if (!query.trim()) return;
     window.open(links[platform](query), "_blank");
     saveRecent(query);
   };
 
   const searchAll = () => {
+    if (!query.trim()) return;
     saveRecent(query);
     Object.keys(links).forEach((platform) =>
       window.open(links[platform](query), "_blank")
@@ -77,13 +77,33 @@ function App() {
 
   return (
     <div className={darkMode ? "container dark" : "container light"}>
+      {/* 🌗 THEME TOGGLE (Uiverse) */}
       <div className="theme-toggle">
-        <button onClick={() => setDarkMode(!darkMode)}>
-          <span>{darkMode ? <FaSun /> : <FaMoon />}</span>
-        </button>
+        <label className="switch">
+          <input
+            id="input"
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+          />
+          <span className="slider round">
+            <span className="sun-moon">
+              <span id="moon-dot-1" className="moon-dot" />
+              <span id="moon-dot-2" className="moon-dot" />
+              <span id="moon-dot-3" className="moon-dot" />
+            </span>
+
+            <svg className="stars" viewBox="0 0 24 24">
+              <polygon id="star-1" className="star" points="12,0 15,8 24,9 17,14 19,22 12,18 5,22 7,14 0,9 9,8" />
+              <polygon id="star-2" className="star" points="12,0 15,8 24,9 17,14 19,22 12,18 5,22 7,14 0,9 9,8" />
+              <polygon id="star-3" className="star" points="12,0 15,8 24,9 17,14 19,22 12,18 5,22 7,14 0,9 9,8" />
+              <polygon id="star-4" className="star" points="12,0 15,8 24,9 17,14 19,22 12,18 5,22 7,14 0,9 9,8" />
+            </svg>
+          </span>
+        </label>
       </div>
 
-      <h1>SearchDeck </h1>
+      <h1>SearchDeck</h1>
       <p className="subtitle">Search once. Explore everywhere.</p>
 
       <div className="search-box">
@@ -109,14 +129,12 @@ function App() {
               Clear All
             </button>
           </div>
+
           <div className="recent-list">
             {recent.map((r, i) => (
               <div key={i} className="recent-item">
                 <button onClick={() => setQuery(r)}>{r}</button>
-                <button
-                  className="remove-btn"
-                  onClick={() => removeSearch(r)}
-                >
+                <button className="remove-btn" onClick={() => removeSearch(r)}>
                   ✕
                 </button>
               </div>
@@ -126,41 +144,13 @@ function App() {
       )}
 
       <div className="grid">
-        <button onClick={() => search("whatsapp")}>
-          <span>
-            <FaWhatsapp /> WhatsApp
-          </span>
-        </button>
-        <button onClick={() => search("instagram")}>
-          <span>
-            <FaInstagram /> Instagram
-          </span>
-        </button>
-        <button onClick={() => search("facebook")}>
-          <span>
-            <FaFacebookF /> Facebook
-          </span>
-        </button>
-        <button onClick={() => search("twitter")}>
-          <span>
-            <FaTwitter /> X
-          </span>
-        </button>
-        <button onClick={() => search("telegram")}>
-          <span>
-            <FaTelegramPlane /> Telegram
-          </span>
-        </button>
-        <button onClick={() => search("youtube")}>
-          <span>
-            <FaYoutube /> YouTube
-          </span>
-        </button>
-        <button onClick={() => search("spotify")}>
-          <span>
-            <FaSpotify /> Spotify
-          </span>
-        </button>
+        <button onClick={() => search("whatsapp")}><span><FaWhatsapp /> WhatsApp</span></button>
+        <button onClick={() => search("instagram")}><span><FaInstagram /> Instagram</span></button>
+        <button onClick={() => search("facebook")}><span><FaFacebookF /> Facebook</span></button>
+        <button onClick={() => search("twitter")}><span><FaTwitter /> X</span></button>
+        <button onClick={() => search("telegram")}><span><FaTelegramPlane /> Telegram</span></button>
+        <button onClick={() => search("youtube")}><span><FaYoutube /> YouTube</span></button>
+        <button onClick={() => search("spotify")}><span><FaSpotify /> Spotify</span></button>
       </div>
     </div>
   );
