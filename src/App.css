@@ -42,7 +42,7 @@ body {
 /* ===== TITLE ===== */
 h1 {
   margin-bottom: 8px;
-  color: #ff8c00; /* orange accent */
+  color: #2d8cf0; /* orange accent */
 }
 
 .container.light h1 {
@@ -73,7 +73,7 @@ h1 {
 
 .search-box button {
   border-radius: 0 8px 8px 0;
-  background: #ff8c00;
+  background: #2d8cf0;
   color: #000;
 }
 
@@ -125,7 +125,7 @@ button::before {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background: #ff8c00; /* orange ripple */
+  background: #2d8cf0; /* orange ripple */
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
   transition: transform 0.7s cubic-bezier(.19,1,.22,1), opacity 0.35s ease;
@@ -208,89 +208,73 @@ button:hover {
   height: 120px;
 }
 /* ===============================
-   🌗 UIVERSE THEME TOGGLE
+   🌗 ORIGINAL TOGGLE (FIXED)
    =============================== */
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
-.switch #input {
+/* Toggle wrapper */
+.switch {
+  --input-focus: #2d8cf0;
+  --bg-color: #fff;
+  --main-color: #000;
+
+  position: relative;
+  width: 50px;
+  height: 20px;
+
+  display: inline-block;
+}
+
+/* Hide checkbox */
+.toggle {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
+/* Slider track */
 .slider {
+  box-sizing: border-box;
   position: absolute;
-  cursor: pointer;
   inset: 0;
-  background-color: #ff8c00; /* orange */
-  transition: 0.4s;
-  overflow: hidden;
+
+  background-color: var(--bg-color);
+  border: 2px solid var(--main-color);
+  border-radius: 6px;
+
+  box-shadow: 4px 4px var(--main-color);
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.sun-moon {
+/* Slider knob */
+.slider::before {
+  content: "";
   position: absolute;
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: #ffd27d;
-  transition: 0.4s;
+
+  height: 20px;
+  width: 20px;
+  left: -2px;
+  bottom: -2px;
+
+  background-color: var(--bg-color);
+  border: 2px solid var(--main-color);
+  border-radius: 6px;
+
+  box-shadow: 0 3px 0 var(--main-color);
+  transition: 0.3s;
 }
 
-/* Dark mode */
-#input:checked + .slider {
-  background-color: #000;
+/* Checked state */
+.toggle:checked + .slider {
+  background-color: var(--input-focus);
 }
 
-#input:checked + .slider .sun-moon {
-  transform: translateX(26px);
-  background-color: #e0e0e0;
-}
-
-.moon-dot {
-  opacity: 0;
-  transition: 0.4s;
-  fill: gray;
-}
-
-#input:checked + .slider .sun-moon .moon-dot {
-  opacity: 1;
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round .sun-moon {
-  border-radius: 50%;
-}
-
-/* Stars */
-.stars {
-  transform: translateY(-32px);
-  opacity: 0;
-  transition: 0.4s;
-}
-
-#input:checked + .slider .stars {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.star {
-  fill: #ccc;
-  position: absolute;
-  animation: star-twinkle 2s infinite;
-}
-
-@keyframes star-twinkle {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+.toggle:checked + .slider::before {
+  transform: translateX(30px);
 }

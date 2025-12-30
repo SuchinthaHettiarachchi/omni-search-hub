@@ -77,31 +77,19 @@ function App() {
 
   return (
     <div className={darkMode ? "container dark" : "container light"}>
-      {/* 🌗 THEME TOGGLE (Uiverse) */}
-      <div className="theme-toggle">
-        <label className="switch">
-          <input
-            id="input"
-            type="checkbox"
-            checked={darkMode}
-            onChange={() => setDarkMode(!darkMode)}
-          />
-          <span className="slider round">
-            <span className="sun-moon">
-              <span id="moon-dot-1" className="moon-dot" />
-              <span id="moon-dot-2" className="moon-dot" />
-              <span id="moon-dot-3" className="moon-dot" />
-            </span>
+     {/* 🌗 THEME TOGGLE (ORIGINAL STYLE – FIXED) */}
+<div className="theme-toggle">
+  <label className="switch">
+    <input
+      className="toggle"
+      type="checkbox"
+      checked={darkMode}
+      onChange={() => setDarkMode(!darkMode)}
+    />
+    <span className="slider"></span>
+  </label>
+</div>
 
-            <svg className="stars" viewBox="0 0 24 24">
-              <polygon id="star-1" className="star" points="12,0 15,8 24,9 17,14 19,22 12,18 5,22 7,14 0,9 9,8" />
-              <polygon id="star-2" className="star" points="12,0 15,8 24,9 17,14 19,22 12,18 5,22 7,14 0,9 9,8" />
-              <polygon id="star-3" className="star" points="12,0 15,8 24,9 17,14 19,22 12,18 5,22 7,14 0,9 9,8" />
-              <polygon id="star-4" className="star" points="12,0 15,8 24,9 17,14 19,22 12,18 5,22 7,14 0,9 9,8" />
-            </svg>
-          </span>
-        </label>
-      </div>
 
       <h1>SearchDeck</h1>
       <p className="subtitle">Search once. Explore everywhere.</p>
@@ -134,7 +122,10 @@ function App() {
             {recent.map((r, i) => (
               <div key={i} className="recent-item">
                 <button onClick={() => setQuery(r)}>{r}</button>
-                <button className="remove-btn" onClick={() => removeSearch(r)}>
+                <button
+                  className="remove-btn"
+                  onClick={() => removeSearch(r)}
+                >
                   ✕
                 </button>
               </div>
