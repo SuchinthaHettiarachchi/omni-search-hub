@@ -62,18 +62,17 @@ function App() {
   };
 
   const search = (platform) => {
-    if (!query.trim()) return;
-    window.open(links[platform](query), "_blank");
-    saveRecent(query);
-  };
+  window.open(links[platform](query || ""), "_blank");
+  if (query.trim()) saveRecent(query);
+};
 
-  const searchAll = () => {
-    if (!query.trim()) return;
-    saveRecent(query);
-    Object.keys(links).forEach((platform) =>
-      window.open(links[platform](query), "_blank")
-    );
-  };
+const searchAll = () => {
+  if (!query.trim()) return; // keep this to avoid popup spam
+  saveRecent(query);
+  Object.keys(links).forEach((platform) =>
+    window.open(links[platform](query), "_blank")
+  );
+};
 
   return (
     <div className={darkMode ? "container dark" : "container light"}>
