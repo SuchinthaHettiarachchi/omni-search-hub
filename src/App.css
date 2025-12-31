@@ -278,3 +278,49 @@ button:hover {
 .toggle:checked + .slider::before {
   transform: translateX(30px);
 }
+/* ===============================
+   🧊 GLASS MODE SYSTEM
+   =============================== */
+
+.glass-mode .glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.35),
+    0 10px 30px rgba(0,0,0,0.25);
+  color: #fff;
+}
+
+/* Disable ripple overpowering glass */
+.glass-mode button::before {
+  opacity: 0.4;
+}
+
+/* Search input glass */
+.glass-mode .search-box input {
+  background: transparent;
+  color: #fff;
+}
+
+/* Glass toggle button */
+.glass-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  padding: 8px 14px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.glass-toggle.active {
+  background: rgba(45, 140, 240, 0.35);
+}

@@ -15,6 +15,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [recent, setRecent] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
+  const [glassMode, setGlassMode] = useState(false); // 🧊 NEW
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -62,38 +63,49 @@ function App() {
   };
 
   const search = (platform) => {
-  window.open(links[platform](query || ""), "_blank");
-  if (query.trim()) saveRecent(query);
-};
+    window.open(links[platform](query || ""), "_blank");
+    if (query.trim()) saveRecent(query);
+  };
 
-const searchAll = () => {
-  if (!query.trim()) return; // keep this to avoid popup spam
-  saveRecent(query);
-  Object.keys(links).forEach((platform) =>
-    window.open(links[platform](query), "_blank")
-  );
-};
+  const searchAll = () => {
+    if (!query.trim()) return;
+    saveRecent(query);
+    Object.keys(links).forEach((platform) =>
+      window.open(links[platform](query), "_blank")
+    );
+  };
 
   return (
-    <div className={darkMode ? "container dark" : "container light"}>
-     {/* 🌗 THEME TOGGLE (ORIGINAL STYLE – FIXED) */}
-<div className="theme-toggle">
-  <label className="switch">
-    <input
-      className="toggle"
-      type="checkbox"
-      checked={darkMode}
-      onChange={() => setDarkMode(!darkMode)}
-    />
-    <span className="slider"></span>
-  </label>
-</div>
+    <div
+      className={`container ${darkMode ? "dark" : "light"} ${
+        glassMode ? "glass-mode" : ""
+      }`}
+    >
+      {/* 🌗 DARK MODE TOGGLE */}
+      <div className="theme-toggle">
+        <label className="switch">
+          <input
+            className="toggle"
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+          />
+          <span className="slider"></span>
+        </label>
+      </div>
 
+      {/* 🧊 GLASS MODE TOGGLE */}
+      <button
+        className={`glass-toggle ${glassMode ? "active" : ""}`}
+        onClick={() => setGlassMode(!glassMode)}
+      >
+        🧊 Glass
+      </button>
 
       <h1>SearchDeck</h1>
       <p className="subtitle">Search once. Explore everywhere.</p>
 
-      <div className="search-box">
+      <div className="search-box glass">
         <input
           type="text"
           placeholder="Search everything..."
@@ -109,38 +121,26 @@ const searchAll = () => {
       </div>
 
       {recent.length > 0 && (
-        <div className="recent">
-          <div className="recent-header">
-            <h3>Recent Searches</h3>
-            <button className="clear-all" onClick={clearAllSearches}>
-              Clear All
-            </button>
-          </div>
-
+        <div className="recent glass">
+          <h3>Recent Searches</h3>
           <div className="recent-list">
             {recent.map((r, i) => (
-              <div key={i} className="recent-item">
-                <button onClick={() => setQuery(r)}>{r}</button>
-                <button
-                  className="remove-btn"
-                  onClick={() => removeSearch(r)}
-                >
-                  ✕
-                </button>
-              </div>
+              <button key={i} onClick={() => setQuery(r)}>
+                {r}
+              </button>
             ))}
           </div>
         </div>
       )}
 
       <div className="grid">
-        <button onClick={() => search("whatsapp")}><span><FaWhatsapp /> WhatsApp</span></button>
-        <button onClick={() => search("instagram")}><span><FaInstagram /> Instagram</span></button>
-        <button onClick={() => search("facebook")}><span><FaFacebookF /> Facebook</span></button>
-        <button onClick={() => search("twitter")}><span><FaTwitter /> X</span></button>
-        <button onClick={() => search("telegram")}><span><FaTelegramPlane /> Telegram</span></button>
-        <button onClick={() => search("youtube")}><span><FaYoutube /> YouTube</span></button>
-        <button onClick={() => search("spotify")}><span><FaSpotify /> Spotify</span></button>
+        <button className="glass" onClick={() => search("whatsapp")}><span><FaWhatsapp /> WhatsApp</span></button>
+        <button className="glass" onClick={() => search("instagram")}><span><FaInstagram /> Instagram</span></button>
+        <button className="glass" onClick={() => search("facebook")}><span><FaFacebookF /> Facebook</span></button>
+        <button className="glass" onClick={() => search("twitter")}><span><FaTwitter /> X</span></button>
+        <button className="glass" onClick={() => search("telegram")}><span><FaTelegramPlane /> Telegram</span></button>
+        <button className="glass" onClick={() => search("youtube")}><span><FaYoutube /> YouTube</span></button>
+        <button className="glass" onClick={() => search("spotify")}><span><FaSpotify /> Spotify</span></button>
       </div>
     </div>
   );
