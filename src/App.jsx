@@ -15,7 +15,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [recent, setRecent] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
-  const [glassMode, setGlassMode] = useState(false); // 🧊 NEW
+  const [glassMode, setGlassMode] = useState(false);
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -31,15 +31,18 @@ function App() {
     localStorage.setItem("recentSearches", JSON.stringify(updated));
   };
 
-  const removeSearch = (q) => {
-    const updated = recent.filter((r) => r !== q);
-    setRecent(updated);
-    localStorage.setItem("recentSearches", JSON.stringify(updated));
+  const search = (platform) => {
+    if (!query.trim()) return;
+    window.open(links[platform](query), "_blank");
+    saveRecent(query);
   };
 
-  const clearAllSearches = () => {
-    setRecent([]);
-    localStorage.removeItem("recentSearches");
+  const searchAll = () => {
+    if (!query.trim()) return;
+    saveRecent(query);
+    Object.keys(links).forEach((platform) =>
+      window.open(links[platform](query), "_blank")
+    );
   };
 
   const links = {
@@ -51,7 +54,8 @@ function App() {
       `https://www.instagram.com/explore/tags/${encodeURIComponent(q)}`,
     facebook: (q) =>
       `https://www.facebook.com/search/top?q=${encodeURIComponent(q)}`,
-    twitter: (q) => `https://twitter.com/search?q=${encodeURIComponent(q)}`,
+    twitter: (q) =>
+      `https://twitter.com/search?q=${encodeURIComponent(q)}`,
     telegram: (q) =>
       isMobile
         ? `tg://msg?text=${encodeURIComponent(q)}`
@@ -60,19 +64,6 @@ function App() {
       `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`,
     spotify: (q) =>
       `https://open.spotify.com/search/${encodeURIComponent(q)}`,
-  };
-
-  const search = (platform) => {
-    window.open(links[platform](query || ""), "_blank");
-    if (query.trim()) saveRecent(query);
-  };
-
-  const searchAll = () => {
-    if (!query.trim()) return;
-    saveRecent(query);
-    Object.keys(links).forEach((platform) =>
-      window.open(links[platform](query), "_blank")
-    );
   };
 
   return (
@@ -94,17 +85,30 @@ function App() {
         </label>
       </div>
 
-      {/* 🧊 GLASS MODE TOGGLE */}
-      <button
-        className={`glass-toggle ${glassMode ? "active" : ""}`}
-        onClick={() => setGlassMode(!glassMode)}
+      {/* 🧊 GLASS MODE TOGGLE (ENTRY STYLE) */}
+      <a
+        href="#"
+        className={`glass-toggle-btn button type--C ${
+          glassMode ? "active" : ""
+        }`}
+        onClick={(e) => {
+          e.preventDefault();
+          setGlassMode(!glassMode);
+        }}
       >
-        🧊 Glass
-      </button>
+        <div className="button__line"></div>
+        <div className="button__line"></div>
+        <span className="button__text">
+          {glassMode ? "GLASS ON" : "GLASS OFF"}
+        </span>
+        <div className="button__drow1"></div>
+        <div className="button__drow2"></div>
+      </a>
 
       <h1>SearchDeck</h1>
       <p className="subtitle">Search once. Explore everywhere.</p>
 
+      {/* 🔍 SEARCH */}
       <div className="search-box glass">
         <input
           type="text"
@@ -120,6 +124,7 @@ function App() {
         </button>
       </div>
 
+      {/* 🕘 RECENT SEARCHES */}
       {recent.length > 0 && (
         <div className="recent glass">
           <h3>Recent Searches</h3>
@@ -133,14 +138,29 @@ function App() {
         </div>
       )}
 
+      {/* 🌐 PLATFORM GRID */}
       <div className="grid">
-        <button className="glass" onClick={() => search("whatsapp")}><span><FaWhatsapp /> WhatsApp</span></button>
-        <button className="glass" onClick={() => search("instagram")}><span><FaInstagram /> Instagram</span></button>
-        <button className="glass" onClick={() => search("facebook")}><span><FaFacebookF /> Facebook</span></button>
-        <button className="glass" onClick={() => search("twitter")}><span><FaTwitter /> X</span></button>
-        <button className="glass" onClick={() => search("telegram")}><span><FaTelegramPlane /> Telegram</span></button>
-        <button className="glass" onClick={() => search("youtube")}><span><FaYoutube /> YouTube</span></button>
-        <button className="glass" onClick={() => search("spotify")}><span><FaSpotify /> Spotify</span></button>
+        <button className="glass" onClick={() => search("whatsapp")}>
+          <span><FaWhatsapp /> WhatsApp</span>
+        </button>
+        <button className="glass" onClick={() => search("instagram")}>
+          <span><FaInstagram /> Instagram</span>
+        </button>
+        <button className="glass" onClick={() => search("facebook")}>
+          <span><FaFacebookF /> Facebook</span>
+        </button>
+        <button className="glass" onClick={() => search("twitter")}>
+          <span><FaTwitter /> X</span>
+        </button>
+        <button className="glass" onClick={() => search("telegram")}>
+          <span><FaTelegramPlane /> Telegram</span>
+        </button>
+        <button className="glass" onClick={() => search("youtube")}>
+          <span><FaYoutube /> YouTube</span>
+        </button>
+        <button className="glass" onClick={() => search("spotify")}>
+          <span><FaSpotify /> Spotify</span>
+        </button>
       </div>
     </div>
   );
