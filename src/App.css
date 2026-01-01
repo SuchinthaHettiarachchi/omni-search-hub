@@ -51,7 +51,7 @@ body {
     30px 30px,
     30px 30px;
 
-  animation: slide 4s linear infinite;
+  animation: slide 2s linear infinite;
 
   opacity: 0;               /* OFF by default */
   pointer-events: none;
@@ -66,7 +66,7 @@ body {
 
 /* Enable pattern only when glass mode is ON */
 .container.glass-mode::before {
-  opacity: 0.35;
+  opacity: 0.2;
 }
 
 /* Pattern animation */
