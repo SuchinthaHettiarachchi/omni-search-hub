@@ -363,3 +363,42 @@ button:hover {
 .glass-toggle-btn.active {
   filter: drop-shadow(0 0 14px rgba(45,140,240,0.8));
 }
+/* ===============================
+   🧊 GLASS MODE – FORCE SEE THROUGH
+   =============================== */
+
+/* Buttons */
+.container.glass-mode button.glass {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(1px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* Search bar container */
+.container.glass-mode .search-box.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(1px);
+  border-radius: 14px;
+  padding: 4px;
+}
+
+/* Search input */
+.container.glass-mode .search-box input {
+  background: transparent !important;
+  color: #fff;
+}
+
+/* Recent search container */
+.container.glass-mode .recent.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+/* Reduce ripple dominance in glass */
+.container.glass-mode button::before {
+  opacity: 0.25
+}
