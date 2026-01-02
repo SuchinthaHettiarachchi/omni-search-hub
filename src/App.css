@@ -26,42 +26,41 @@ body {
 
 /* ===== THEMES ===== */
 .container.dark {
-  background: linear-gradient(135deg, #111, #1c1c1c);
-  color: #e0e0e0;
+  background: linear-gradient(135deg, #0e0e0e, #1c1c1c);
+  color: #e6e6e6;
 }
 
 .container.light {
-  background: linear-gradient(135deg, #a0e5f1, #f1f1f1);
+  background: linear-gradient(135deg, #eafcff, #ffffff);
   color: #1a1a1a;
 }
 
 /* ===============================
-   🎨 ANIMATED PATTERN BACKGROUND
-   (Glass mode only)
+   🎨 ANIMATED PATTERN (GLASS ONLY)
    =============================== */
 .container::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, #0000 18.75%, #000 0 31.25%, #0000 0),
-    linear-gradient(45deg,  #0000 18.75%, #000 0 31.25%, #0000 0),
-    linear-gradient(135deg, #0000 18.75%, #000 0 31.25%, #0000 0),
-    linear-gradient(45deg,  #0000 18.75%, #000 0 31.25%, #0000 0);
+    linear-gradient(135deg, #0000 18.75%, #3b82f6 0 31.25%, #0000 0),
+    linear-gradient(45deg,  #0000 18.75%, #3b82f6 0 31.25%, #0000 0),
+    linear-gradient(135deg, #0000 18.75%, #3b82f6 0 31.25%, #0000 0),
+    linear-gradient(45deg,  #0000 18.75%, #3b82f6 0 31.25%, #0000 0);
   background-size: 60px 60px;
   background-position:
     0 0,
     0 0,
     30px 30px,
     30px 30px;
-  animation: slide 2s linear infinite;
+  animation: slide 3.5s linear infinite;
   opacity: 0;
   pointer-events: none;
   z-index: 0;
 }
 
 .container.glass-mode::before {
-  opacity: 0.18;
+  opacity: 0.22;
 }
 
 @keyframes slide {
@@ -101,15 +100,24 @@ h1 {
 .search-box input {
   padding: 12px;
   width: 750px;
-  border-radius: 8px 0 0 8px;
+  border-radius: 10px 0 0 10px;
   border: none;
+  outline: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.container.dark .search-box input {
   background: #1a1a1a;
   color: #fff;
-  outline: none;
+}
+
+.container.light .search-box input {
+  background: #ffffff;
+  color: #000;
 }
 
 .search-box button {
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 10px 10px 0;
   background: #2d8cf0;
   color: #000;
   border: none;
@@ -129,17 +137,25 @@ h1 {
 button {
   position: relative;
   overflow: hidden;
-  background: #1e1e1e;
   border: none;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 15px;
   font-size: 18px;
   cursor: pointer;
-  color: #e0e0e0;
   transition: transform 0.25s ease, color 0.25s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
   opacity: 0;
   animation: fadeInUp 0.45s ease forwards;
+}
+
+.container.dark button {
+  background: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.container.light button {
+  background: #f2f2f2;
+  color: #000;
 }
 
 button span {
@@ -153,8 +169,8 @@ button::before {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   background: #2d8cf0;
   transform: translate(-50%, -50%) scale(0);
@@ -193,25 +209,24 @@ button:hover {
 .recent-list button {
   padding: 10px 18px;
   font-size: 16px;
-  background: #2a2a2a;
-  color: #ff8c00;
   opacity: 1;
   animation: none;
 }
 
 /* ===============================
-   🌗 THEME TOGGLE (SLIDER)
+   🌗 THEME TOGGLE
    =============================== */
 .theme-toggle {
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 40px;
+  z-index: 10;
 }
 
 .switch {
   position: relative;
-  width: 50px;
-  height: 20px;
+  width: 52px;
+  height: 22px;
 }
 
 .toggle {
@@ -221,18 +236,18 @@ button:hover {
 .slider {
   position: absolute;
   inset: 0;
-  background: #fff;
+  background: #ffffff;
   border: 2px solid #000;
-  border-radius: 6px;
-  box-shadow: 4px 4px #000;
+  border-radius: 7px;
+  box-shadow: 3px 3px #000;
   cursor: pointer;
 }
 
 .slider::before {
   content: "";
   position: absolute;
-  width: 19px;
-  height: 19px;
+  width: 20px;
+  height: 20px;
   left: -2px;
   bottom: -2px;
   background: #fff;
@@ -254,12 +269,19 @@ button:hover {
    =============================== */
 .glass-mode .glass {
   background: rgba(255,255,255,0.14);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,0.35),
     0 10px 30px rgba(0,0,0,0.25);
+}
+
+.container.light.glass-mode .glass {
+  color: #000;
+}
+
+.container.dark.glass-mode .glass {
   color: #fff;
 }
 
@@ -273,7 +295,6 @@ button:hover {
 
 /* ===============================
    🧊 GLASS TOGGLE BUTTON
-   (ENTRY STYLE)
    =============================== */
 .glass-toggle-btn {
   position: absolute;
@@ -283,7 +304,6 @@ button:hover {
   scale: 0.78;
 }
 
-/* Button Theme */
 .type--C {
   --line_color: #2d8cf0;
   --back_color: rgba(255,255,255,0.3);
