@@ -212,52 +212,69 @@ button:hover {
   opacity: 1;
   animation: none;
 }
-
 /* ===============================
-   🌗 THEME TOGGLE
+   🌗 ORIGINAL THEME TOGGLE (FIXED)
    =============================== */
+
 .theme-toggle {
   position: absolute;
   top: 20px;
-  right: 40px;
+  right: 20px;
   z-index: 10;
 }
 
 .switch {
+  --input-focus: #2d8cf0;
+  --main-color: #000;
+  --bg-color: #fff;
+
   position: relative;
-  width: 52px;
-  height: 22px;
+  width: 50px;
+  height: 20px;
+  display: inline-block;
+}
+
+/* Dark mode variable override */
+.container.dark .switch {
+  --main-color: #fff;
+  --bg-color: #1a1a1a;
 }
 
 .toggle {
   opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
   position: absolute;
   inset: 0;
-  background: #ffffff;
-  border: 2px solid #000;
-  border-radius: 7px;
-  box-shadow: 3px 3px #000;
   cursor: pointer;
+  background-color: var(--bg-color);
+  transition: 0.3s;
 }
 
 .slider::before {
   content: "";
+  box-sizing: border-box;
   position: absolute;
-  width: 20px;
   height: 20px;
+  width: 20px;
+  border: 2px solid var(--main-color);
+  border-radius: 6px;
   left: -2px;
   bottom: -2px;
-  background: #fff;
-  border: 2px solid #000;
-  border-radius: 6px;
+  background-color: var(--bg-color);
+  box-shadow: 0 3px 0 var(--main-color);
   transition: 0.3s;
 }
 
 .toggle:checked + .slider {
-  background: #2d8cf0;
+  background-color: var(--input-focus);
 }
 
 .toggle:checked + .slider::before {
