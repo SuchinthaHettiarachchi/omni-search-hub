@@ -19,32 +19,47 @@ function App() {
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+  /* ===============================
+     LOAD RECENT SEARCHES
+     =============================== */
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("recentSearches") || "[]");
+    const saved = JSON.parse(
+      localStorage.getItem("recentSearches") || "[]"
+    );
     setRecent(saved);
   }, []);
 
+  /* ===============================
+     SAVE RECENT SEARCH
+     =============================== */
   const saveRecent = (q) => {
     if (!q.trim()) return;
+
     const updated = [q, ...recent.filter((r) => r !== q)].slice(0, 5);
     setRecent(updated);
     localStorage.setItem("recentSearches", JSON.stringify(updated));
   };
 
-  const search = (platform) => {
-    if (!query.trim()) return;
-    window.open(links[platform](query), "_blank");
-    saveRecent(query);
+  /* ===============================
+     REMOVE ONE RECENT
+     =============================== */
+  const removeSearch = (q) => {
+    const updated = recent.filter((r) => r !== q);
+    setRecent(updated);
+    localStorage.setItem("recentSearches", JSON.stringify(updated));
   };
 
-  const searchAll = () => {
-    if (!query.trim()) return;
-    saveRecent(query);
-    Object.keys(links).forEach((platform) =>
-      window.open(links[platform](query), "_blank")
-    );
+  /* ===============================
+     CLEAR ALL RECENTS
+     =============================== */
+  const clearAllSearches = () => {
+    setRecent([]);
+    localStorage.removeItem("recentSearches");
   };
 
+  /* ===============================
+     LINKS
+     =============================== */
   const links = {
     whatsapp: (q) =>
       isMobile
@@ -64,6 +79,23 @@ function App() {
       `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`,
     spotify: (q) =>
       `https://open.spotify.com/search/${encodeURIComponent(q)}`,
+  };
+
+  /* ===============================
+     SEARCH FUNCTIONS
+     =============================== */
+  const search = (platform) => {
+    if (!query.trim()) return;
+    window.open(links[platform](query), "_blank");
+    saveRecent(query);
+  };
+
+  const searchAll = () => {
+    if (!query.trim()) return;
+    saveRecent(query);
+    Object.keys(links).forEach((platform) =>
+      window.open(links[platform](query), "_blank")
+    );
   };
 
   return (
@@ -128,13 +160,31 @@ function App() {
       {recent.length > 0 && (
         <div className="recent glass">
           <h3>Recent Searches</h3>
+
           <div className="recent-list">
             {recent.map((r, i) => (
-              <button key={i} onClick={() => setQuery(r)}>
-                {r}
-              </button>
+              <div key={i} className="recent-item glass">
+                <button
+                  className="recent-text"
+                  onClick={() => setQuery(r)}
+                >
+                  {r}
+                </button>
+
+                <button
+                  className="recent-remove"
+                  onClick={() => removeSearch(r)}
+                  aria-label="Remove recent search"
+                >
+                  ✕
+                </button>
+              </div>
             ))}
           </div>
+
+          <button className="clear-all" onClick={clearAllSearches}>
+            Clear All
+          </button>
         </div>
       )}
 
