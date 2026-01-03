@@ -43,10 +43,10 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, #0000 18.75%, #3b82f6 0 31.25%, #0000 0),
-    linear-gradient(45deg,  #0000 18.75%, #3b82f6 0 31.25%, #0000 0),
-    linear-gradient(135deg, #0000 18.75%, #3b82f6 0 31.25%, #0000 0),
-    linear-gradient(45deg,  #0000 18.75%, #3b82f6 0 31.25%, #0000 0);
+    linear-gradient(135deg, #0000 18.75%, #ff4800 0 31.25%, #0000 0),
+    linear-gradient(45deg,  #0000 18.75%, #ff4800 0 31.25%, #0000 0),
+    linear-gradient(135deg, #0000 18.75%, #ff4800 0 31.25%, #0000 0),
+    linear-gradient(45deg,  #0000 18.75%, #ff4800 0 31.25%, #0000 0);
   background-size: 60px 60px;
   background-position:
     0 0,
