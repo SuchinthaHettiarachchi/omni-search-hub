@@ -1,4 +1,7 @@
-/* ===== RESET ===== */
+/* =========================================================
+   🔁 GLOBAL RESET
+   Removes default browser spacing and ensures full-height app
+   ========================================================= */
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -11,7 +14,10 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== MAIN CONTAINER ===== */
+/* =========================================================
+   📦 MAIN APP CONTAINER
+   Holds the entire UI and handles theme transitions
+   ========================================================= */
 .container {
   position: relative;
   min-height: 100vh;
@@ -24,7 +30,9 @@ body {
   overflow: hidden;
 }
 
-/* ===== THEMES ===== */
+/* =========================================================
+   🌗 THEME MODES
+   ========================================================= */
 .container.dark {
   background: linear-gradient(135deg, #0e0e0e, #1c1c1c);
   color: #e6e6e6;
@@ -35,9 +43,10 @@ body {
   color: #1a1a1a;
 }
 
-/* ===============================
-   🎨 ANIMATED PATTERN (GLASS ONLY)
-   =============================== */
+/* =========================================================
+   🎨 ANIMATED PATTERN (VISIBLE ONLY IN GLASS MODE)
+   Sits behind the UI and softly moves for depth
+   ========================================================= */
 .container::before {
   content: "";
   position: absolute;
@@ -48,38 +57,34 @@ body {
     linear-gradient(135deg, #0000 18.75%, #ff4800 0 31.25%, #0000 0),
     linear-gradient(45deg,  #0000 18.75%, #ff4800 0 31.25%, #0000 0);
   background-size: 60px 60px;
-  background-position:
-    0 0,
-    0 0,
-    30px 30px,
-    30px 30px;
+  background-position: 0 0, 0 0, 30px 30px, 30px 30px;
   animation: slide 3.5s linear infinite;
   opacity: 0;
   pointer-events: none;
   z-index: 0;
 }
 
+/* Activate pattern only when glass mode is enabled */
 .container.glass-mode::before {
   opacity: 0.22;
 }
 
+/* Pattern movement animation */
 @keyframes slide {
   to {
-    background-position:
-      60px 0,
-      60px 0,
-      90px 30px,
-      90px 30px;
+    background-position: 60px 0, 60px 0, 90px 30px, 90px 30px;
   }
 }
 
-/* Keep UI above pattern */
+/* Keep UI elements above background pattern */
 .container > * {
   position: relative;
   z-index: 1;
 }
 
-/* ===== TITLE ===== */
+/* =========================================================
+   🏷️ TITLE & SUBTITLE
+   ========================================================= */
 h1 {
   margin-bottom: 8px;
   color: #2d8cf0;
@@ -91,12 +96,15 @@ h1 {
   opacity: 0.75;
 }
 
-/* ===== SEARCH BAR ===== */
+/* =========================================================
+   🔍 SEARCH BAR
+   ========================================================= */
 .search-box {
   display: flex;
   margin-bottom: 20px;
 }
 
+/* Search input */
 .search-box input {
   padding: 12px;
   width: 750px;
@@ -106,6 +114,7 @@ h1 {
   transition: background 0.3s, color 0.3s;
 }
 
+/* Theme-based input colors */
 .container.dark .search-box input {
   background: #1a1a1a;
   color: #fff;
@@ -116,6 +125,7 @@ h1 {
   color: #000;
 }
 
+/* Search button */
 .search-box button {
   border-radius: 0 10px 10px 0;
   background: #2d8cf0;
@@ -124,7 +134,9 @@ h1 {
   cursor: pointer;
 }
 
-/* ===== GRID ===== */
+/* =========================================================
+   🌐 PLATFORM GRID
+   ========================================================= */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -133,7 +145,10 @@ h1 {
   width: 100%;
 }
 
-/* ===== BASE BUTTON ===== */
+/* =========================================================
+   🔘 BASE BUTTON STYLING
+   Used by all platform & action buttons
+   ========================================================= */
 button {
   position: relative;
   overflow: hidden;
@@ -148,6 +163,7 @@ button {
   animation: fadeInUp 0.45s ease forwards;
 }
 
+/* Theme-based button colors */
 .container.dark button {
   background: #1e1e1e;
   color: #e0e0e0;
@@ -163,7 +179,7 @@ button span {
   z-index: 2;
 }
 
-/* Ripple */
+/* Ripple effect */
 button::before {
   content: "";
   position: absolute;
@@ -188,12 +204,15 @@ button:hover {
   transform: scale(1.06);
 }
 
+/* Entrance animation */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== RECENT SEARCH ===== */
+/* =========================================================
+   🕘 RECENT SEARCHES
+   ========================================================= */
 .recent {
   margin: 15px 0;
   text-align: center;
@@ -212,10 +231,10 @@ button:hover {
   opacity: 1;
   animation: none;
 }
-/* ===============================
-   🌗 ORIGINAL THEME TOGGLE (FIXED)
-   =============================== */
 
+/* =========================================================
+   🌗 DARK / LIGHT TOGGLE SWITCH
+   ========================================================= */
 .theme-toggle {
   position: absolute;
   top: 20px;
@@ -227,7 +246,6 @@ button:hover {
   --input-focus: #2d8cf0;
   --main-color: #000;
   --bg-color: #fff;
-
   position: relative;
   width: 50px;
   height: 20px;
@@ -247,7 +265,6 @@ button:hover {
 }
 
 .slider {
-  box-sizing: border-box;
   border-radius: 6px;
   border: 2px solid var(--main-color);
   box-shadow: 4px 4px var(--main-color);
@@ -260,7 +277,6 @@ button:hover {
 
 .slider::before {
   content: "";
-  box-sizing: border-box;
   position: absolute;
   height: 20px;
   width: 20px;
@@ -281,9 +297,10 @@ button:hover {
   transform: translateX(30px);
 }
 
-/* ===============================
+/* =========================================================
    🧊 GLASS MODE SYSTEM
-   =============================== */
+   Applies frosted-glass effect across UI
+   ========================================================= */
 .glass-mode .glass {
   background: rgba(255,255,255,0.14);
   backdrop-filter: blur(18px) saturate(160%);
@@ -294,120 +311,25 @@ button:hover {
     0 10px 30px rgba(0,0,0,0.25);
 }
 
-.container.light.glass-mode .glass {
-  color: #000;
-}
+/* Glass text contrast by theme */
+.container.light.glass-mode .glass { color: #000; }
+.container.dark.glass-mode .glass { color: #fff; }
 
-.container.dark.glass-mode .glass {
-  color: #fff;
-}
-
+/* Transparent input when glass is active */
 .glass-mode .search-box input {
   background: transparent;
 }
 
+/* Softer ripple in glass mode */
 .glass-mode button::before {
-  opacity: 0.4;
+  opacity: 0.25;
 }
 
-/* ===============================
-   🧊 GLASS TOGGLE BUTTON
-   =============================== */
-.glass-toggle-btn {
-  position: absolute;
-  top: 18px;
-  left: 20px;
-  z-index: 10;
-  scale: 0.78;
-}
-
-.type--C {
-  --line_color: #2d8cf0;
-  --back_color: rgba(255,255,255,0.3);
-}
-
-.button {
-  width: 220px;
-  height: 52px;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: bold;
-  color: var(--line_color);
-  letter-spacing: 2px;
-  transition: 0.3s;
-}
-
-.button__text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.button::before,
-.button::after,
-.button__text::before,
-.button__text::after {
-  content: "";
-  position: absolute;
-  height: 3px;
-  background: var(--line_color);
-  transition: 0.5s;
-}
-
-.button::before { top: 0; left: 54px; width: calc(100% - 124px); }
-.button::after { top: 0; right: 54px; width: 8px; }
-.button__text::before { bottom: 0; right: 54px; width: calc(100% - 124px); }
-.button__text::after { bottom: 0; left: 54px; width: 8px; }
-
-.glass-toggle-btn.active {
-  filter: drop-shadow(0 0 14px rgba(45,140,240,0.8));
-}
-/* ===============================
-   🧊 GLASS MODE – FORCE SEE THROUGH
-   =============================== */
-
-/* Buttons */
-.container.glass-mode button.glass {
-  background: rgba(255, 255, 255, 0.12) !important;
-  backdrop-filter: blur(1px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-}
-
-/* Search bar container */
-.container.glass-mode .search-box.glass {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(1px);
-  border-radius: 14px;
-  padding: 4px;
-}
-
-/* Search input */
-.container.glass-mode .search-box input {
-  background: transparent !important;
-  color: #fff;
-}
-
-/* Recent search container */
-.container.glass-mode .recent.glass {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  border-radius: 16px;
-  padding: 12px;
-}
-
-/* Reduce ripple dominance in glass */
-.container.glass-mode button::before {
-  opacity: 0.25
-}
-/* ===============================
-   🧊 TRUE SEE-THROUGH GLASS
-   =============================== */
-
+/* =========================================================
+   🧊 TRUE SEE-THROUGH SEARCH BUTTON
+   ========================================================= */
 .container.glass-mode .search-box button {
-  background: rgba(255, 255, 255, 0.06) !important; /* 👈 key change */
+  background: rgba(255, 255, 255, 0.06) !important;
   backdrop-filter: blur(22px) saturate(180%);
   -webkit-backdrop-filter: blur(22px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -417,13 +339,12 @@ button:hover {
     0 6px 18px rgba(0,0,0,0.18);
 }
 
-/* Hover – subtle, not solid */
+/* Subtle hover – no solid fill */
 .container.glass-mode .search-box button:hover {
- background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
 
-
-/* Ripple almost invisible */
+/* Almost invisible ripple in glass mode */
 .container.glass-mode .search-box button::before {
   opacity: 0.15;
-}
 }
