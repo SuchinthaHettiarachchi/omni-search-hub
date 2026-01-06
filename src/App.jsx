@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+
+// Social & utility icons
 import {
   FaWhatsapp,
   FaInstagram,
@@ -12,15 +14,25 @@ import {
 } from "react-icons/fa";
 
 function App() {
+  /* ===============================
+     STATE MANAGEMENT
+     =============================== */
+
+  // Search query input
   const [query, setQuery] = useState("");
+
+  // Recent search history
   const [recent, setRecent] = useState([]);
+
+  // Theme mode toggles
   const [darkMode, setDarkMode] = useState(true);
   const [glassMode, setGlassMode] = useState(false);
 
+  // Detect mobile devices for deep-link support
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   /* ===============================
-     LOAD RECENT SEARCHES
+     INITIAL LOAD – RECENT SEARCHES
      =============================== */
   useEffect(() => {
     const saved = JSON.parse(
@@ -30,8 +42,10 @@ function App() {
   }, []);
 
   /* ===============================
-     SAVE RECENT SEARCH
+     RECENT SEARCH HANDLERS
      =============================== */
+
+  // Save a new search (deduplicated, max 5 items)
   const saveRecent = (q) => {
     if (!q.trim()) return;
 
@@ -40,59 +54,65 @@ function App() {
     localStorage.setItem("recentSearches", JSON.stringify(updated));
   };
 
-  /* ===============================
-     REMOVE ONE RECENT
-     =============================== */
+  // Remove a single recent search
   const removeSearch = (q) => {
     const updated = recent.filter((r) => r !== q);
     setRecent(updated);
     localStorage.setItem("recentSearches", JSON.stringify(updated));
   };
 
-  /* ===============================
-     CLEAR ALL RECENTS
-     =============================== */
+  // Clear all recent searches
   const clearAllSearches = () => {
     setRecent([]);
     localStorage.removeItem("recentSearches");
   };
 
   /* ===============================
-     LINKS
+     PLATFORM SEARCH LINKS
      =============================== */
   const links = {
     whatsapp: (q) =>
       isMobile
         ? `whatsapp://send?text=${encodeURIComponent(q)}`
         : `https://wa.me/?text=${encodeURIComponent(q)}`,
+
     instagram: (q) =>
       `https://www.instagram.com/explore/tags/${encodeURIComponent(q)}`,
+
     facebook: (q) =>
       `https://www.facebook.com/search/top?q=${encodeURIComponent(q)}`,
+
     twitter: (q) =>
       `https://twitter.com/search?q=${encodeURIComponent(q)}`,
+
     telegram: (q) =>
       isMobile
         ? `tg://msg?text=${encodeURIComponent(q)}`
         : `https://t.me/s/${encodeURIComponent(q)}`,
+
     youtube: (q) =>
       `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`,
+
     spotify: (q) =>
       `https://open.spotify.com/search/${encodeURIComponent(q)}`,
   };
 
   /* ===============================
-     SEARCH FUNCTIONS
+     SEARCH ACTIONS
      =============================== */
+
+  // Search on a single platform
   const search = (platform) => {
     if (!query.trim()) return;
     window.open(links[platform](query), "_blank");
     saveRecent(query);
   };
 
+  // Search on all platforms
   const searchAll = () => {
     if (!query.trim()) return;
     saveRecent(query);
+
     Object.keys(links).forEach((platform) =>
       window.open(links[platform](query), "_blank")
     );
@@ -104,7 +124,9 @@ function App() {
         glassMode ? "glass-mode" : ""
       }`}
     >
-      {/* 🌗 DARK MODE TOGGLE */}
+      {/* ===============================
+         THEME TOGGLE (DARK / LIGHT)
+         =============================== */}
       <div className="theme-toggle">
         <label className="switch">
           <input
@@ -117,7 +139,9 @@ function App() {
         </label>
       </div>
 
-      {/* 🧊 GLASS MODE TOGGLE (ENTRY STYLE) */}
+      {/* ===============================
+         GLASS MODE TOGGLE
+         =============================== */}
       <a
         href="#"
         className={`glass-toggle-btn button type--C ${
@@ -128,19 +152,20 @@ function App() {
           setGlassMode(!glassMode);
         }}
       >
-        <div className="button__line"></div>
-        <div className="button__line"></div>
         <span className="button__text">
           {glassMode ? "GLASS ON" : "GLASS OFF"}
         </span>
-        <div className="button__drow1"></div>
-        <div className="button__drow2"></div>
       </a>
 
+      {/* ===============================
+         APP HEADER
+         =============================== */}
       <h1>SearchDeck</h1>
       <p className="subtitle">Search once. Explore everywhere.</p>
 
-      {/* 🔍 SEARCH */}
+      {/* ===============================
+         SEARCH BAR
+         =============================== */}
       <div className="search-box glass">
         <input
           type="text"
@@ -156,7 +181,9 @@ function App() {
         </button>
       </div>
 
-      {/* 🕘 RECENT SEARCHES */}
+      {/* ===============================
+         RECENT SEARCH HISTORY
+         =============================== */}
       {recent.length > 0 && (
         <div className="recent glass">
           <h3>Recent Searches</h3>
@@ -188,7 +215,9 @@ function App() {
         </div>
       )}
 
-      {/* 🌐 PLATFORM GRID */}
+      {/* ===============================
+         PLATFORM QUICK ACTIONS
+         =============================== */}
       <div className="grid">
         <button className="glass" onClick={() => search("whatsapp")}>
           <span><FaWhatsapp /> WhatsApp</span>
