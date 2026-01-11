@@ -128,7 +128,7 @@ h1 {
 /* Search button */
 .search-box button {
   border-radius: 0 10px 10px 0;
-  background: #2d8cf0;
+  background: #031425;
   color: #000;
   border: none;
   cursor: pointer;
@@ -188,7 +188,7 @@ button::before {
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: #2d8cf0;
+  background: #003a79;
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
   transition: transform 0.7s cubic-bezier(.19,1,.22,1), opacity 0.35s ease;
@@ -243,7 +243,7 @@ button:hover {
 }
 
 .switch {
-  --input-focus: #2d8cf0;
+  --input-focus: #f09b2d;
   --main-color: #000;
   --bg-color: #fff;
   position: relative;
