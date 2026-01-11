@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./App.css";
 
 // Social & utility icons
@@ -15,24 +15,31 @@ import {
 
 function App() {
   /* ===============================
-     STATE MANAGEMENT
+     STATE
      =============================== */
-
   const [query, setQuery] = useState("");
   const [recent, setRecent] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
   const [glassMode, setGlassMode] = useState(false);
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  /* ===============================
+     DEVICE CHECK (SAFE)
+     =============================== */
+  const isMobile = useMemo(() => {
+    if (typeof navigator === "undefined") return false;
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  }, []);
 
   /* ===============================
-     INITIAL LOAD – RECENT SEARCHES
+     LOAD RECENT SEARCHES (ONCE)
      =============================== */
   useEffect(() => {
-    const saved = JSON.parse(
-      localStorage.getItem("recentSearches") || "[]"
-    );
-    setRecent(saved);
+    try {
+      const saved = JSON.parse(localStorage.getItem("recentSearches") || "[]");
+      setRecent(saved);
+    } catch {
+      setRecent([]);
+    }
   }, []);
 
   /* ===============================
@@ -40,6 +47,7 @@ function App() {
      =============================== */
   const saveRecent = (q) => {
     if (!q.trim()) return;
+
     const updated = [q, ...recent.filter((r) => r !== q)].slice(0, 5);
     setRecent(updated);
     localStorage.setItem("recentSearches", JSON.stringify(updated));
@@ -57,7 +65,7 @@ function App() {
   };
 
   /* ===============================
-     PLATFORM SEARCH LINKS
+     PLATFORM LINKS
      =============================== */
   const links = {
     whatsapp: (q) =>
@@ -85,15 +93,16 @@ function App() {
      =============================== */
   const search = (platform) => {
     if (!query.trim()) return;
-    window.open(links[platform](query), "_blank");
+    window.open(links[platform](query), "_blank", "noopener,noreferrer");
     saveRecent(query);
   };
 
   const searchAll = () => {
     if (!query.trim()) return;
     saveRecent(query);
-    Object.keys(links).forEach((p) =>
-      window.open(links[p](query), "_blank")
+    // NOTE: May be blocked by popup blockers (browser limitation)
+    Object.values(links).forEach((fn) =>
+      window.open(fn(query), "_blank", "noopener,noreferrer")
     );
   };
 
@@ -103,50 +112,34 @@ function App() {
         glassMode ? "glass-mode" : ""
       }`}
     >
-      {/* ===============================
-         🧊 GLASS MODE TOGGLE (TOP LEFT)
-         =============================== */}
+      {/* 🧊 GLASS MODE TOGGLE */}
       <div className="glass-toggle">
-        <a
-          href="#"
-          className={`glass-toggle-btn ${
-            glassMode ? "active" : ""
-          }`}
-          onClick={(e) => {
-            e.preventDefault();
-            setGlassMode(!glassMode);
-          }}
+        <button
+          type="button"
+          className={`glass-toggle-btn ${glassMode ? "active" : ""}`}
+          onClick={() => setGlassMode((v) => !v)}
         >
-          <span className="button__text">
-            {glassMode ? "GLASS ON" : "GLASS OFF"}
-          </span>
-        </a>
+          {glassMode ? "GLASS ON" : "GLASS OFF"}
+        </button>
       </div>
 
-      {/* ===============================
-         🌗 THEME TOGGLE (TOP RIGHT)
-         =============================== */}
+      {/* 🌗 THEME TOGGLE */}
       <div className="theme-toggle">
         <label className="switch">
           <input
             className="toggle"
             type="checkbox"
             checked={darkMode}
-            onChange={() => setDarkMode(!darkMode)}
+            onChange={() => setDarkMode((v) => !v)}
           />
           <span className="slider"></span>
         </label>
       </div>
 
-      {/* ===============================
-         APP HEADER
-         =============================== */}
       <h1>SearchDeck</h1>
       <p className="subtitle">Search once. Explore everywhere.</p>
 
-      {/* ===============================
-         SEARCH BAR
-         =============================== */}
+      {/* 🔍 SEARCH BAR */}
       <div className="search-box glass">
         <input
           type="text"
@@ -155,21 +148,19 @@ function App() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && searchAll()}
         />
-        <button onClick={searchAll}>
-          <span><FaSearch /></span>
+        <button onClick={searchAll} aria-label="Search">
+          <FaSearch />
         </button>
       </div>
 
-      {/* ===============================
-         RECENT SEARCH HISTORY
-         =============================== */}
+      {/* 🕘 RECENT SEARCHES */}
       {recent.length > 0 && (
         <div className="recent glass">
           <h3>Recent Searches</h3>
 
           <div className="recent-list">
-            {recent.map((r, i) => (
-              <div key={i} className="recent-item glass">
+            {recent.map((r) => (
+              <div key={r} className="recent-item glass">
                 <button
                   className="recent-text"
                   onClick={() => setQuery(r)}
@@ -194,9 +185,7 @@ function App() {
         </div>
       )}
 
-      {/* ===============================
-         PLATFORM QUICK ACTIONS
-         =============================== */}
+      {/* 🌐 PLATFORM BUTTONS */}
       <div className="grid">
         <button className="glass" onClick={() => search("whatsapp")}><FaWhatsapp /> WhatsApp</button>
         <button className="glass" onClick={() => search("instagram")}><FaInstagram /> Instagram</button>
