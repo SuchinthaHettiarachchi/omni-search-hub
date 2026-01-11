@@ -348,3 +348,44 @@ button:hover {
 .container.glass-mode .search-box button::before {
   opacity: 0.15;
 }
+/* =========================================================
+   🧊 GLASS MODE TOGGLE – TOP LEFT
+   ========================================================= */
+/* =========================================================
+   🧊 GLASS MODE TOGGLE – TOP LEFT CORNER
+   ========================================================= */
+.glass-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+
+/* Optional: make the glass toggle look like other buttons */
+.glass-toggle-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.glass-toggle-btn:hover {
+  transform: scale(1.06);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Active state */
+.glass-toggle-btn.active {
+  background: rgba(45, 140, 240, 0.35);
+  border-color: rgba(45, 140, 240, 0.8);
+}
