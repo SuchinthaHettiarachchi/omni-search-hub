@@ -243,7 +243,7 @@ button:hover {
 }
 
 .switch {
-  --input-focus: #f09b2d;
+  --input-focus: #2d8cf0;
   --main-color: #000;
   --bg-color: #fff;
   position: relative;
@@ -384,7 +384,7 @@ button:hover {
 /* Active state */
 .glass-toggle-btn.active {
   background: rgba(45, 140, 240, 0.35);
-  border-color: rgba(45, 140, 240, 0.8);
+  border-color: rgba(0,0,0,0.25);
 }
 /* ===============================
    RECENT SEARCH ITEM
