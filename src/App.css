@@ -116,7 +116,7 @@ h1 {
 
 /* Theme-based input colors */
 .container.dark .search-box input {
-  background: #1a1a1a;
+  background: #111111;
   color: #fff;
 }
 
