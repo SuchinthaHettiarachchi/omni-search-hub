@@ -312,7 +312,7 @@ button:hover {
 
 /* TRUE SEE-THROUGH SEARCH BUTTON */
 .container.glass-mode .search-box button {
-  background: rgba(255, 255, 255, 0.06) !important;
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(22px) saturate(180%);
   -webkit-backdrop-filter: blur(22px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -324,7 +324,7 @@ button:hover {
 
 /* Subtle hover – no solid fill */
 .container.glass-mode .search-box button:hover {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Almost invisible ripple in glass mode */
