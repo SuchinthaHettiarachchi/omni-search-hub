@@ -1,3 +1,47 @@
+/* CSS VARIABLES - Theme colors & design tokens */
+:root {
+  /* Dark theme */
+  --dark-bg-primary: #0e0e0e;
+  --dark-bg-secondary: #1c1c1c;
+  --dark-bg-tertiary: #1e1e1e;
+  --dark-bg-card: #111111;
+  --dark-text: #e6e6e6;
+  --dark-text-light: #e0e0e0;
+  
+  /* Light theme */
+  --light-bg-primary: #eafcff;
+  --light-bg-secondary: #ffffff;
+  --light-bg-card: #f2f2f2;
+  --light-text: #1a1a1a;
+  --light-text-dark: #000;
+  
+  /* Accent colors */
+  --accent-primary: #2064ad;
+  --accent-ripple: #003a79;
+  --accent-focus: #2d8cf0;
+  
+  /* Glass mode */
+  --glass-bg: rgba(255, 255, 255, 0.14);
+  --glass-bg-button: rgba(255, 255, 255, 0.06);
+  --glass-bg-button-hover: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-border-button: rgba(255, 255, 255, 0.18);
+  --glass-inner-light: rgba(255, 255, 255, 0.35);
+  --glass-blur-standard: 18px;
+  --glass-blur-button: 22px;
+  
+  /* Animations */
+  --anim-fast: 0.25s;
+  --anim-standard: 0.3s;
+  --anim-slow: 0.45s;
+  --anim-slowest: 0.7s;
+  
+  /* Layout */
+  --spacing-lg: 80px;
+  --border-radius: 10px;
+  --ripple-size: 160px;
+}
+
 /* Reset defaults & full-height layout */
 html, body, #root {
   margin: 0;
@@ -19,20 +63,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 80px;
+  padding-top: var(--spacing-lg);
   transition: background 0.4s ease, color 0.4s ease;
   overflow: hidden;
 }
 
 /* THEME MODES*/
 .container.dark {
-  background: linear-gradient(135deg, #0e0e0e, #1c1c1c);
-  color: #e6e6e6;
+  background: linear-gradient(135deg, var(--dark-bg-primary), var(--dark-bg-secondary));
+  color: var(--dark-text);
 }
 
 .container.light {
-  background: linear-gradient(135deg, #eafcff, #ffffff);
-  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--light-bg-primary), var(--light-bg-secondary));
+  color: var(--light-text);
 }
 
 /* Animated background pattern for glass mode */
@@ -76,7 +120,7 @@ body {
 /* TITLE & SUBTITLE */
 h1 {
   margin-bottom: 8px;
-  color: #2064ad;
+  color: var(--accent-primary);
 }
 
 .subtitle {
