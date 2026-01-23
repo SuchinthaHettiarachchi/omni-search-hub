@@ -96,10 +96,19 @@ h1 {
 .search-box input {
   padding: 12px;
   width: 750px;
+  max-width: 90vw;
   border-radius: 10px 0 0 10px;
   border: none;
   outline: none;
   transition: background 0.3s, color 0.3s;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .search-box input {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 /* Theme-based input colors */
