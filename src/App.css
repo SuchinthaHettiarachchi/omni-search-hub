@@ -1,5 +1,4 @@
-/* GLOBAL RESET
-   Removes default browser spacing and ensures full-height app */
+/* Reset defaults & full-height layout */
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -12,8 +11,7 @@ body {
   overflow-x: hidden;
 }
 
-/* MAIN APP CONTAINER
-   Holds the entire UI and handles theme transitions */
+/* Main container with theme support */
 .container {
   position: relative;
   min-height: 100vh;
@@ -37,8 +35,7 @@ body {
   color: #1a1a1a;
 }
 
-/* ANIMATED PATTERN (VISIBLE ONLY IN GLASS MODE)
-   Sits behind the UI and softly moves for depth */
+/* Animated background pattern for glass mode */
 .container::before {
   content: "";
   position: absolute;
@@ -57,7 +54,7 @@ body {
   will-change: background-position;
 }
 
-/* Activate pattern only when glass mode is enabled */
+/* Show pattern in glass mode */
 .container.glass-mode::before {
   opacity: 0.22;
   z-index: 0;
@@ -70,7 +67,7 @@ body {
   }
 }
 
-/* Keep UI elements above background pattern */
+/* UI layer above pattern */
 .container > * {
   position: relative;
   z-index: 1;
@@ -94,7 +91,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Search input */
+/* Input field */
 .search-box input {
   padding: 12px;
   width: 750px;
@@ -142,8 +139,7 @@ h1 {
   width: 100%;
 }
 
-/* BASE BUTTON STYLING
-   Used by all platform & action buttons */
+/* Base button styles */
 button {
   position: relative;
   overflow: hidden;
