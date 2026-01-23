@@ -14,25 +14,19 @@ import {
 } from "react-icons/fa";
 
 function App() {
-  /* ===============================
-     STATE
-     =============================== */
+  /*  STATE*/
   const [query, setQuery] = useState("");
   const [recent, setRecent] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
   const [glassMode, setGlassMode] = useState(false);
 
-  /* ===============================
-     DEVICE CHECK (SAFE)
-     =============================== */
+  /* DEVICE CHECK (SAFE) */
   const isMobile = useMemo(() => {
     if (typeof navigator === "undefined") return false;
     return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   }, []);
 
-  /* ===============================
-     LOAD RECENT SEARCHES (ONCE)
-     =============================== */
+  /* LOAD RECENT SEARCHES (ONCE) */
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem("recentSearches") || "[]");
@@ -42,9 +36,7 @@ function App() {
     }
   }, []);
 
-  /* ===============================
-     RECENT SEARCH HANDLERS
-     =============================== */
+  /* RECENT SEARCH HANDLERS */
   const saveRecent = (q) => {
     if (!q.trim()) return;
 
@@ -64,9 +56,7 @@ function App() {
     localStorage.removeItem("recentSearches");
   };
 
-  /* ===============================
-     PLATFORM LINKS
-     =============================== */
+  /* PLATFORM LINKS */
   const links = {
     whatsapp: (q) =>
       isMobile
@@ -88,9 +78,7 @@ function App() {
       `https://open.spotify.com/search/${encodeURIComponent(q)}`,
   };
 
-  /* ===============================
-     SEARCH ACTIONS
-     =============================== */
+  /* SEARCH ACTIONS */
   const search = (platform) => {
     if (!query.trim()) return;
     window.open(links[platform](query), "_blank", "noopener,noreferrer");
@@ -112,7 +100,7 @@ function App() {
         glassMode ? "glass-mode" : ""
       }`}
     >
-      {/* 🧊 GLASS MODE TOGGLE */}
+      {/* GLASS MODE TOGGLE */}
       <div className="glass-toggle">
         <button
           type="button"
@@ -123,7 +111,7 @@ function App() {
         </button>
       </div>
 
-      {/* 🌗 THEME TOGGLE */}
+      {/* THEME TOGGLE */}
       <div className="theme-toggle">
         <label className="switch">
           <input
@@ -139,7 +127,7 @@ function App() {
       <h1>SearchDeck</h1>
       <p className="subtitle">Search once. Explore everywhere.</p>
 
-      {/* 🔍 SEARCH BAR */}
+      {/* SEARCH BAR */}
       <div className="search-box glass">
         <input
           type="text"
@@ -153,7 +141,7 @@ function App() {
         </button>
       </div>
 
-      {/* 🕘 RECENT SEARCHES */}
+      {/* RECENT SEARCHES */}
       {recent.length > 0 && (
         <div className="recent glass">
           <h3>Recent Searches</h3>
@@ -185,7 +173,7 @@ function App() {
         </div>
       )}
 
-      {/* 🌐 PLATFORM BUTTONS */}
+      {/*  PLATFORM BUTTONS */}
       <div className="grid">
         <button className="glass" onClick={() => search("whatsapp")}><FaWhatsapp /> WhatsApp</button>
         <button className="glass" onClick={() => search("instagram")}><FaInstagram /> Instagram</button>

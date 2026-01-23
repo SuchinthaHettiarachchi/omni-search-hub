@@ -1,7 +1,5 @@
-/* =========================================================
-   🔁 GLOBAL RESET
-   Removes default browser spacing and ensures full-height app
-   ========================================================= */
+/* GLOBAL RESET
+   Removes default browser spacing and ensures full-height app */
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -14,10 +12,8 @@ body {
   overflow-x: hidden;
 }
 
-/* =========================================================
-   📦 MAIN APP CONTAINER
-   Holds the entire UI and handles theme transitions
-   ========================================================= */
+/* MAIN APP CONTAINER
+   Holds the entire UI and handles theme transitions */
 .container {
   position: relative;
   min-height: 100vh;
@@ -30,9 +26,7 @@ body {
   overflow: hidden;
 }
 
-/* =========================================================
-   🌗 THEME MODES
-   ========================================================= */
+/* THEME MODES*/
 .container.dark {
   background: linear-gradient(135deg, #0e0e0e, #1c1c1c);
   color: #e6e6e6;
@@ -43,10 +37,8 @@ body {
   color: #1a1a1a;
 }
 
-/* =========================================================
-   🎨 ANIMATED PATTERN (VISIBLE ONLY IN GLASS MODE)
-   Sits behind the UI and softly moves for depth
-   ========================================================= */
+/* ANIMATED PATTERN (VISIBLE ONLY IN GLASS MODE)
+   Sits behind the UI and softly moves for depth */
 .container::before {
   content: "";
   position: absolute;
@@ -82,9 +74,7 @@ body {
   z-index: 1;
 }
 
-/* =========================================================
-   🏷️ TITLE & SUBTITLE
-   ========================================================= */
+/* TITLE & SUBTITLE */
 h1 {
   margin-bottom: 8px;
   color: #2064ad;
@@ -96,9 +86,7 @@ h1 {
   opacity: 0.75;
 }
 
-/* =========================================================
-   🔍 SEARCH BAR
-   ========================================================= */
+/* SEARCH BAR*/
 .search-box {
   display: flex;
   margin-bottom: 20px;
@@ -134,9 +122,7 @@ h1 {
   cursor: pointer;
 }
 
-/* =========================================================
-   🌐 PLATFORM GRID
-   ========================================================= */
+/* PLATFORM GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -145,10 +131,8 @@ h1 {
   width: 100%;
 }
 
-/* =========================================================
-   🔘 BASE BUTTON STYLING
-   Used by all platform & action buttons
-   ========================================================= */
+/* BASE BUTTON STYLING
+   Used by all platform & action buttons */
 button {
   position: relative;
   overflow: hidden;
@@ -210,9 +194,7 @@ button:hover {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* =========================================================
-   🕘 RECENT SEARCHES
-   ========================================================= */
+/* RECENT SEARCHES*/
 .recent {
   margin: 15px 0;
   text-align: center;
@@ -232,9 +214,7 @@ button:hover {
   animation: none;
 }
 
-/* =========================================================
-   🌗 DARK / LIGHT TOGGLE SWITCH
-   ========================================================= */
+/*  DARK / LIGHT TOGGLE SWITCH */
 .theme-toggle {
   position: absolute;
   top: 20px;
@@ -297,10 +277,8 @@ button:hover {
   transform: translateX(30px);
 }
 
-/* =========================================================
-   🧊 GLASS MODE SYSTEM
-   Applies frosted-glass effect across UI
-   ========================================================= */
+/* GLASS MODE SYSTEM */ 
+/* frosted-glass effect across UI */
 .glass-mode .glass {
   background: rgba(255,255,255,0.14);
   backdrop-filter: blur(18px) saturate(160%);
@@ -325,9 +303,7 @@ button:hover {
   opacity: 0.25;
 }
 
-/* =========================================================
-   🧊 TRUE SEE-THROUGH SEARCH BUTTON
-   ========================================================= */
+/* TRUE SEE-THROUGH SEARCH BUTTON */
 .container.glass-mode .search-box button {
   background: rgba(255, 255, 255, 0.06) !important;
   backdrop-filter: blur(22px) saturate(180%);
@@ -348,9 +324,7 @@ button:hover {
 .container.glass-mode .search-box button::before {
   opacity: 0.15;
 }
-/* =========================================================
-   🧊 GLASS MODE TOGGLE – TOP LEFT CORNER
-   ========================================================= */
+/* GLASS MODE TOGGLE – TOP LEFT CORNER */
 .glass-toggle {
   position: absolute;
   top: 20px;
@@ -386,9 +360,8 @@ button:hover {
   background: rgba(45, 140, 240, 0.35);
   border-color: rgba(0,0,0,0.25);
 }
-/* ===============================
-   RECENT SEARCH ITEM
-   =============================== */
+
+/* RECENT SEARCH ITEM */
 .recent-item {
   display: flex;
   align-items: center;
