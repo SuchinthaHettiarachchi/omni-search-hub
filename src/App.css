@@ -166,6 +166,29 @@ h1 {
   color: var(--light-text-dark);
 }
 
+/* Input focus states */
+.search-box input:focus {
+  box-shadow: 0 0 0 2px var(--accent-focus);
+}
+
+/* Placeholder styling */
+.search-box input::placeholder {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.container.dark .search-box input::placeholder {
+  color: #aaa;
+}
+
+.container.light .search-box input::placeholder {
+  color: #666;
+}
+
+.search-box input:focus::placeholder {
+  opacity: 0.4;
+}
+
 /* Search button */
 .search-box button {
   border-radius: 0 10px 10px 0;
@@ -174,10 +197,17 @@ h1 {
   border: none;
   cursor: pointer;
   transition: background 0.3s ease, color 0.3s ease;
+  min-height: 46px;
+  padding: 12px 20px;
 }
 
 .search-box button:hover {
   background: #0a2847;
+}
+
+.search-box button:focus-visible {
+  outline: 2px solid var(--accent-focus);
+  outline-offset: -2px;
 }
 
 /* PLATFORM GRID */
@@ -204,6 +234,11 @@ button {
   animation: fadeInUp var(--anim-slow) ease forwards;
   outline: 2px solid transparent;
   outline-offset: 2px;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:focus-visible {
@@ -259,6 +294,35 @@ button:active {
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  button {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .container {
+    transition: none;
+  }
+  
+  .container::before {
+    animation: none;
+  }
+  
+  button,
+  .search-box input,
+  .search-box button,
+  .recent-text,
+  .recent-remove,
+  .slider {
+    transition: none;
+  }
+  
+  button:hover {
+    transform: none;
+  }
 }
 
 /* RECENT SEARCHES*/
@@ -428,7 +492,6 @@ button:active {
   border-color: rgba(0,0,0,0.25);
 }
 
-/* RECENT SEARCH ITEM */
 .recent-item {
   display: flex;
   align-items: center;
@@ -441,10 +504,22 @@ button:active {
   font-size: 15px;
   cursor: pointer;
   transition: opacity 0.2s ease;
+  padding: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .recent-text:hover {
   opacity: 0.8;
+}
+
+.recent-text:focus-visible {
+  outline: 2px solid var(--accent-focus);
 }
 
 .recent-remove {
@@ -454,10 +529,23 @@ button:active {
   cursor: pointer;
   opacity: 0.7;
   transition: opacity 0.2s ease;
+  padding: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .recent-remove:hover {
   opacity: 1;
+}
+
+.recent-remove:focus-visible {
+  outline: 2px solid var(--accent-focus);
 }
 
 /* Clear all button */
