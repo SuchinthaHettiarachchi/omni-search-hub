@@ -718,3 +718,132 @@ button:disabled::before {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* RESPONSIVE BREAKPOINTS */
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .container {
+    padding-top: 60px;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    max-width: 600px;
+  }
+  
+  .search-box input {
+    width: 600px;
+    max-width: 80vw;
+  }
+  
+  button {
+    font-size: 16px;
+    padding: 12px;
+  }
+  
+  h1 {
+    font-size: 2.2em;
+  }
+}
+
+/* Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+  .container {
+    padding-top: 60px;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 100%;
+  }
+  
+  .search-box {
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .search-box input,
+  .search-box button {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .search-box button {
+    margin-top: 8px;
+  }
+  
+  button {
+    font-size: 14px;
+    padding: 12px;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  .subtitle {
+    font-size: 13px;
+  }
+  
+  .recent {
+    max-height: 250px;
+  }
+  
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .glass-toggle {
+    top: 10px;
+    left: 10px;
+  }
+}
+
+/* Extra small screens (max-width: 380px) */
+@media (max-width: 380px) {
+  .container {
+    padding-top: 50px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+  
+  .subtitle {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    font-size: 13px;
+    padding: 10px;
+    min-height: 40px;
+  }
+  
+  .search-box input {
+    padding: 10px;
+  }
+  
+  .recent-list {
+    gap: 8px;
+  }
+  
+  .switch {
+    width: 45px;
+    height: 18px;
+  }
+  
+  .glass-toggle-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
