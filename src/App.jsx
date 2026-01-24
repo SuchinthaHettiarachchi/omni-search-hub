@@ -197,13 +197,13 @@ function App() {
 
       {/*  PLATFORM BUTTONS */}
       <div className="grid">
-        <button className="glass" onClick={() => search("whatsapp")} disabled={isQueryEmpty} aria-label="Search on WhatsApp"><FaWhatsapp /> WhatsApp</button>
-        <button className="glass" onClick={() => search("instagram")} disabled={isQueryEmpty} aria-label="Search on Instagram"><FaInstagram /> Instagram</button>
-        <button className="glass" onClick={() => search("facebook")} disabled={isQueryEmpty} aria-label="Search on Facebook"><FaFacebookF /> Facebook</button>
-        <button className="glass" onClick={() => search("twitter")} disabled={isQueryEmpty} aria-label="Search on X (Twitter)"><FaTwitter /> X</button>
-        <button className="glass" onClick={() => search("telegram")} disabled={isQueryEmpty} aria-label="Search on Telegram"><FaTelegramPlane /> Telegram</button>
-        <button className="glass" onClick={() => search("youtube")} disabled={isQueryEmpty} aria-label="Search on YouTube"><FaYoutube /> YouTube</button>
-        <button className="glass" onClick={() => search("spotify")} disabled={isQueryEmpty} aria-label="Search on Spotify"><FaSpotify /> Spotify</button>
+        <button className="glass" onClick={() => search("whatsapp")} aria-label="Search on WhatsApp"><FaWhatsapp /> WhatsApp</button>
+        <button className="glass" onClick={() => search("instagram")} aria-label="Search on Instagram"><FaInstagram /> Instagram</button>
+        <button className="glass" onClick={() => search("facebook")} aria-label="Search on Facebook"><FaFacebookF /> Facebook</button>
+        <button className="glass" onClick={() => search("twitter")} aria-label="Search on X (Twitter)"><FaTwitter /> X</button>
+        <button className="glass" onClick={() => search("telegram")} aria-label="Search on Telegram"><FaTelegramPlane /> Telegram</button>
+        <button className="glass" onClick={() => search("youtube")} aria-label="Search on YouTube"><FaYoutube /> YouTube</button>
+        <button className="glass" onClick={() => search("spotify")} aria-label="Search on Spotify"><FaSpotify /> Spotify</button>
       </div>
     </div>
   );
