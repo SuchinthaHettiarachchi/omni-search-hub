@@ -94,6 +94,9 @@ function App() {
     );
   };
 
+  /* INPUT VALIDATION */
+  const isQueryEmpty = !query.trim();
+
   return (
     <div
       className={`container ${darkMode ? "dark" : "light"} ${
@@ -134,9 +137,15 @@ function App() {
           placeholder="Search everything..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && searchAll()}
+          onKeyDown={(e) => e.key === "Enter" && !isQueryEmpty && searchAll()}
+          aria-label="Search query input"
         />
-        <button onClick={searchAll} aria-label="Search">
+        <button 
+          onClick={searchAll} 
+          disabled={isQueryEmpty}
+          aria-label="Search all platforms"
+          title={isQueryEmpty ? "Enter a search query" : "Search all platforms"}
+        >
           <FaSearch />
         </button>
       </div>
@@ -175,13 +184,13 @@ function App() {
 
       {/*  PLATFORM BUTTONS */}
       <div className="grid">
-        <button className="glass" onClick={() => search("whatsapp")}><FaWhatsapp /> WhatsApp</button>
-        <button className="glass" onClick={() => search("instagram")}><FaInstagram /> Instagram</button>
-        <button className="glass" onClick={() => search("facebook")}><FaFacebookF /> Facebook</button>
-        <button className="glass" onClick={() => search("twitter")}><FaTwitter /> X</button>
-        <button className="glass" onClick={() => search("telegram")}><FaTelegramPlane /> Telegram</button>
-        <button className="glass" onClick={() => search("youtube")}><FaYoutube /> YouTube</button>
-        <button className="glass" onClick={() => search("spotify")}><FaSpotify /> Spotify</button>
+        <button className="glass" onClick={() => search("whatsapp")} disabled={isQueryEmpty} aria-label="Search on WhatsApp"><FaWhatsapp /> WhatsApp</button>
+        <button className="glass" onClick={() => search("instagram")} disabled={isQueryEmpty} aria-label="Search on Instagram"><FaInstagram /> Instagram</button>
+        <button className="glass" onClick={() => search("facebook")} disabled={isQueryEmpty} aria-label="Search on Facebook"><FaFacebookF /> Facebook</button>
+        <button className="glass" onClick={() => search("twitter")} disabled={isQueryEmpty} aria-label="Search on X (Twitter)"><FaTwitter /> X</button>
+        <button className="glass" onClick={() => search("telegram")} disabled={isQueryEmpty} aria-label="Search on Telegram"><FaTelegramPlane /> Telegram</button>
+        <button className="glass" onClick={() => search("youtube")} disabled={isQueryEmpty} aria-label="Search on YouTube"><FaYoutube /> YouTube</button>
+        <button className="glass" onClick={() => search("spotify")} disabled={isQueryEmpty} aria-label="Search on Spotify"><FaSpotify /> Spotify</button>
       </div>
     </div>
   );
