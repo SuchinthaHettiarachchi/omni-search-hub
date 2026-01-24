@@ -95,7 +95,6 @@ body {
   opacity: 0;
   pointer-events: none;
   z-index: -1;
-  will-change: background-position;
 }
 
 /* Show pattern in glass mode */
@@ -143,6 +142,7 @@ h1 {
   border-radius: 10px 0 0 10px;
   border: none;
   outline: none;
+  box-sizing: border-box;
   transition: background 0.3s, color 0.3s;
 }
 
@@ -151,6 +151,7 @@ h1 {
   .search-box input {
     width: 100%;
     max-width: none;
+    box-sizing: border-box;
   }
 }
 
@@ -169,9 +170,14 @@ h1 {
 .search-box button {
   border-radius: 0 10px 10px 0;
   background: #031425;
-  color: #000;
+  color: #fff;
   border: none;
   cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.search-box button:hover {
+  background: #0a2847;
 }
 
 /* PLATFORM GRID */
@@ -196,6 +202,12 @@ button {
   box-shadow: 0 6px 18px rgba(0,0,0,0.45);
   opacity: 0;
   animation: fadeInUp var(--anim-slow) ease forwards;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent-focus);
 }
 
 /* Theme-based button colors */
@@ -237,6 +249,10 @@ button:hover::before {
 button:hover {
   color: var(--light-text-dark);
   transform: scale(1.06);
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 /* Entrance animation */
@@ -424,6 +440,11 @@ button:hover {
   border: none;
   font-size: 15px;
   cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.recent-text:hover {
+  opacity: 0.8;
 }
 
 .recent-remove {
@@ -432,6 +453,7 @@ button:hover {
   font-size: 14px;
   cursor: pointer;
   opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
 .recent-remove:hover {
