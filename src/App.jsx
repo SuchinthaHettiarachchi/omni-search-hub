@@ -97,6 +97,18 @@ function App() {
   /* INPUT VALIDATION */
   const isQueryEmpty = !query.trim();
 
+  /* KEYBOARD SHORTCUTS */
+  const handleKeyDown = (e) => {
+    // Enter - Search all platforms
+    if (e.key === "Enter" && !isQueryEmpty) {
+      searchAll();
+    }
+    // Escape - Clear search input
+    if (e.key === "Escape") {
+      setQuery("");
+    }
+  };
+
   return (
     <div
       className={`container ${darkMode ? "dark" : "light"} ${
@@ -137,14 +149,15 @@ function App() {
           placeholder="Search everything..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && !isQueryEmpty && searchAll()}
+          onKeyDown={handleKeyDown}
           aria-label="Search query input"
+          title="Press Enter to search all platforms, Esc to clear"
         />
         <button 
           onClick={searchAll} 
           disabled={isQueryEmpty}
           aria-label="Search all platforms"
-          title={isQueryEmpty ? "Enter a search query" : "Search all platforms"}
+          title={isQueryEmpty ? "Enter a search query" : "Search all platforms (Enter)"}
         >
           <FaSearch />
         </button>
