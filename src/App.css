@@ -450,10 +450,9 @@ button:disabled::before {
   right: 20px;
   z-index: 10;
 }
-
 .switch {
-  --input-focus: #2d8cf0;
-  --main-color: #000;
+  --input-focus: #f0b207;
+  --main-color: #000000;
   --bg-color: #fff;
   position: relative;
   width: 50px;
@@ -463,8 +462,8 @@ button:disabled::before {
 
 /* Dark mode variable override */
 .container.dark .switch {
-  --main-color: #fff;
-  --bg-color: #1a1a1a;
+  --main-color: #f0b207;
+  --bg-color: #000000;
 }
 
 .toggle {
